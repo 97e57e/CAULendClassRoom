@@ -17,4 +17,4 @@ class ClassRoom(models.Model):
         unique_together = (("building_no", "room_no"),)
 
     def __str__(self):
-        return self.building_no + "관 " + self.room_no + "호"
+        return self.building_no.building_no + "관 " + self.room_no + "호"
