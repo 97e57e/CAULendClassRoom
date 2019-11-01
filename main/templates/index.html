@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}{% endblock %}
 {% block content%}
-    메인 페이지<br>
-    검색<br>
+    <div class="classroom-search-box">
+        빈 강의실 검색<br>
+        <form>
+            <input type="date">
+            <input type="number">시 ~ <input type="number">시
+            <input type="submit" value="검색">
+        </form>
+    </div>
     <a href="{% url 'building' 310%}">310관</a><br>
     {% for building in buildings %}
         {{building.building_no}}관 : {{building.building_name}}<br>

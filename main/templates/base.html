@@ -11,8 +11,8 @@
 </head>
 <body>
     {% block navigation %} {% include 'navigation.html' %} {% endblock %}
-
-    {% block content %} {% endblock %}
+    
+    <div class="content-wrapper">{% block content %} {% endblock %}</div>
 
     {% block footer %}{% include 'footer.html' %} {% endblock %}
 </body>
