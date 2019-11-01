@@ -1,7 +1,12 @@
 {% block navigation %}
     <div class="nb-bar">
         <a href="{% url 'index' %}">메인</a>
+        {% if user.is_authenticated%}
+            {{user.profile.user_name}} 님
+            <a href="{% url 'logout' %}">로그아웃</a>
+        {% else %}
         <a href="{% url 'signup' %}">회원가입</a>
         <a href="{% url 'signin' %}">로그인</a>
+        {% endif %}
     </div>
 {% endblock %}

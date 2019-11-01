@@ -1,8 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
+from django.contrib import messages
 from .forms import CreateUserForm
 from .forms import ProfileForm
 from .forms import Profile
+from .forms import LoginForm
 
 from django.views.generic import TemplateView
 from django.http import HttpResponseServerError
@@ -29,14 +32,31 @@ def signup(request):
         profile_form = ProfileForm()
     return render(request, 'signup.html', {'user_form' : user_form})
 
-class signup_done(TemplateView):
-    template_name = 'signup_done.html'
-
 def signin(request):
-    return render(request, 'signin.html')
+    if request.method == 'POST':
+
+        login_form = LoginForm(request.POST)
+
+        if login_form.is_valid():
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
+            user = authenticate( username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('index')
+            login_form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다')
+    else:
+        login_form = LoginForm()
+    context = {
+        'login_form': login_form,
+    }
+    return render(request, 'signin.html', context)
 
 def my_info(request):
     return render(request, 'my_info.html')
 
 def edit_info(request):
     return render(request, 'edit_info.html')
+
+class signup_done(TemplateView):
+    template_name = 'signup_done.html'

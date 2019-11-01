@@ -1,3 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}로그인 | {% endblock %}
-<div>로그인</div>
+{% block content %}
+<div class="login">
+	<form action="{% url 'signin' %}" method="post">
+		{% csrf_token %}
+		{% for field in login_form %}
+			<div class="form-group">
+				{{ field.label_tag }}
+				{{ field }}
+			</div>
+		{% endfor %}
+
+		{% if login_form.non_field_errors %}
+			{% for error in login_form.non_field_errors %}
+			<p class="text-danger"><b>{{ error }}</b></p>
+			{% endfor %}
+		{% endif %}
+		<button class="btn btn-primary btn-block">로그인</button>
+	</form>
+</div>
+{% endblock %}
