@@ -1,3 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}회원가입 | {% endblock %}
+{% block content %}
 <div>회원가입</div>
+<form method="POST" action="{% url 'signup'%}">
+    {% csrf_token %}
+    {% for field in user_form%}
+        {{field.label}} : {{field}}<br>
+    {% endfor %}
+    이름 : <input type="text" name = "user_name"><br>
+    학번 : <input type="number" name = "user_code"><br>
+    전화번호 : <input type="text" placeholder = "010-1234-5678" name = "phone_number"><br>
+    생일 : <input type="text" name = "birth"><br>
+    학과 : <input type="text" name = "dept_name"><br>
+    <input type="submit" value="제출">
+</form>
+{% endblock %}
