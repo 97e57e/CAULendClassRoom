@@ -3,4 +3,7 @@
 {% block content%}
     {{room_name}}<br>
     {{classroom.floor}}층
+    {{classroom.building_no}}
+    {{classroom.room_no}}
+    <a href="{% url 'reservation' classroom.building_no.building_no classroom.room_no%}">예약하기</a>
 {% endblock %}
