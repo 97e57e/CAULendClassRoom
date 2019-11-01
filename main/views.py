@@ -3,7 +3,8 @@ from .models import Building
 from .models import ClassRoom
 
 def index(request):
-    return render(request, 'index.html')
+    buildings = Building.objects.all()
+    return render(request, 'index.html', {'buildings' : buildings})
 
 def building(request, building_no):
     building = get_object_or_404(Building, pk=building_no)
