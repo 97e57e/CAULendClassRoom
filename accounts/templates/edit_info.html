@@ -1,3 +1,18 @@
 {% extends 'base.html' %}
-{% block title %}정보수정 | {% endblock %}
-<div>정보수정</div>
+{% block title %}정보 수정 | {% endblock %}
+{% block content %}
+    <p>내 정보</p>
+    <p>아이디 : {{user_info.username}}</p>
+    <p>이름 : {{user_info.profile.user_name}}</p>
+    <p>학번 : {{user_info.profile.user_code}}</p>
+    <p>학과 : {{user_info.profile.department}}</p>
+    <form method="POST" action="{% url 'request_edit_info'%}">
+        {% csrf_token %}
+        <p>생일 : <input type="date" name = 'edit_birth'></p>
+        <p>전화번호 : <input type="text" value="{{user_info.profile.phone_number}}" name='edit_phone_number'></p>
+        <input type="submit" value="정보 수정">
+    </form>
+
+    <button onclick="location.href='{% url 'my_info' %}'">취소</button>
+
+{% endblock %}

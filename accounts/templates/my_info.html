@@ -1,3 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}내정보 | {% endblock %}
-<div>내정보</div>
+{% block content %}
+    <p>내 정보</p>
+    <p>아이디 : {{user_info.username}}</p>
+    <p>이름 : {{user_info.profile.user_name}}</p>
+    <p>학번 : {{user_info.profile.user_code}}</p>
+    <p>학과 : {{user_info.profile.department}}</p>
+    <p>생일 : {{user_info.profile.birth}}</p>
+    <p>전화번호 : {{user_info.profile.phone_number}}</p>
+
+    <button value="정보 수정" name="정보 수정"onclick="location.href='{% url 'edit_info' %}'">수정 하기</button>
+
+{% endblock %}

@@ -7,7 +7,7 @@ from .forms import ProfileForm
 from .forms import Profile
 from .forms import LoginForm
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from django.http import HttpResponseServerError
 
 
@@ -53,10 +53,28 @@ def signin(request):
     return render(request, 'signin.html', context)
 
 def my_info(request):
-    return render(request, 'my_info.html')
+    user_info = request.user
+    return render(request, 'my_info.html', {'user_info' : user_info})
 
 def edit_info(request):
-    return render(request, 'edit_info.html')
+    if request.method == "POST":
+        return redirect("/")
+    else:
+        user_info = request.user
+        return render(request, 'edit_info.html',{'user_info' : user_info})
+
+def request_edit_info(request):
+    user = request.user
+    if user.is_authenticated:
+        user.profile.birth = request.POST['edit_birth']
+        user.profile.phone_number = request.POST['edit_phone_number']
+        user.profile.save()
+        return redirect('edit_done')
+    else:
+        return HttpResponseServerError('잘못된 접근입니다.')
+
+def edit_done(request):
+    return render(request, 'edit_done.html')
 
 class signup_done(TemplateView):
     template_name = 'signup_done.html'
