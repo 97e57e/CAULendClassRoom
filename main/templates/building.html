@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}{{building.building_no}}관 | {% endblock %}
 {% block content%}
-    {{building.building_no}}
-    {% for room in rooms%}
-        <a href="{% url 'classroom' building.building_no room.room_no %}">{{room.room_no}}호</a>
-    {% endfor %}
-    <br>
-    {% for i in range %}
-        <a href="{% url 'building' building.building_no i%}">{{i}}층</a>
-    {% endfor %}
+    <div class="common-pg-contents">
+        <p class="common-subheading">'{{building.building_no}}' {{building}} </p>
+        {% for room in rooms%}
+            <p><a href="{% url 'classroom' building.building_no room.room_no %}">{{room.room_no}}호</a></p>
+        {% endfor %}
+        <br>
+        {% for i in range %}
+            <a href="{% url 'building' building.building_no i%}">{{i}}층</a>
+        {% endfor %}
+    </div>
 {% endblock %}
