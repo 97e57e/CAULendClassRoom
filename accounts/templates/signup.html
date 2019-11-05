@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}회원가입 | {% endblock %}
 {% block content %}
-<div>회원가입</div>
-<form method="POST" action="{% url 'signup'%}">
-    {% csrf_token %}
-    <p>아이디 : {{user_form.username}}</p>
-    <p>비밀번호 : {{user_form.password1}}</p>
-    <p>비밀번호 확인 : {{user_form.password2}}</p>
-    <p>이름 : <input type="text" name = "user_name"></p>
-    <p>학번 : <input type="number" name = "user_code"></p>
-    <p>전화번호 : <input type="text" placeholder = "010-1234-5678" name = "phone_number"></p>
-    <p>생일 : <input type="date" name = "birth"></p>
-    <p>학과 : <input type="text" name = "dept_name"></p>
-    <input type="submit" value="제출">
-</form>
+<div class="common-pg-contents">
+    <div class="accounts-form-wrapper">
+        <form method="POST" action="{% url 'signup'%}" class="signup-form">
+            <div class="common-subheading">회원가입</div>
+            {% csrf_token %}
+            <p>{{user_form.username}}</p>
+            <p>{{user_form.password1}}</p>
+            <p>{{user_form.password2}}</p>
+            <p><input type="text" name = "user_name" placeholder="이름을 입력해 주세요."></p>
+            <p><input type="number" name = "user_code" placeholder="학번을 입력해 주세요."></p>
+            <p><input type="text" placeholder = "전화번호를 입력해 주세요 . 예)010-1234-5678" name = "phone_number"></p>
+            <p><input type="date" name = "birth" placeholder="생일"></p>
+            <p><input type="text" name = "dept_name" placeholder="학과를 입력 해 주세요"></p>
+            <input type="submit" value="제출">
+        </form>
+    </div>
+</div>
 {% endblock %}

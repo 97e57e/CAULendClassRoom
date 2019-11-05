@@ -4,6 +4,27 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 class CreateUserForm(UserCreationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '아이디를 입력해 주세요.',
+            }
+        )
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': '비밀번호를 입력해 주세요.',
+            }
+        )
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': '비밀번호를 한 번 더 입력해 주세요.',
+            }
+        )
+    )
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
@@ -18,14 +39,14 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'placeholder': '아이디를 입력해 주세요.',
             }
         )
     )
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                'class': 'form-control',
+                'placeholder': '비밀번호를 입력해 주세요.'
             }
         )
     )
