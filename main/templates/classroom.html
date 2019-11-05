@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}{{room_name}} | {% endblock %}
 {% block content%}
-    {{room_name}}<br>
-    {{classroom.floor}}층
-    {{classroom.building_no}}
-    {{classroom.room_no}}
-    <a href="{% url 'reservation' classroom.building_no.building_no classroom.room_no%}">예약하기</a>
+    <div class="common-pg-contents">
+        <p class="common-subheading">{{room_name}}</p>
+        <div class="reservation-calendar">
+            달력 들어갈 자리
+            <p><a href="{% url 'reservation' classroom.building_no.building_no classroom.room_no%}">예약하기</a></p>
+        </div>
+    </div>
 {% endblock %}
