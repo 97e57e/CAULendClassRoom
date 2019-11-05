@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}검색 | {% endblock %}
+{% block content%}
+<div class="classroom-search-box">
+    빈 강의실 검색<br>
+    <form action="{% url 'search' %}">
+        <input type="date">
+        <input type="number">시 ~ <input type="number">시
+        <input type="submit" value="검색">
+    </form>
+</div>
+
+<div class="common-pg-contents">
+    <p>검색 결과</p>
+</div>
+{% endblock %}

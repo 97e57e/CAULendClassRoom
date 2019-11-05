@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('building/<int:building_no>/<int:floor>', views.building, name='building'),
     path('building/<int:building_no>/<int:classroom_no>/', views.classroom, name='classroom'),
+    path('search/', views.search, name='search'),
 ]

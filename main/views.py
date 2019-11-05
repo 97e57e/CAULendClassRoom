@@ -14,3 +14,6 @@ def building(request, building_no, floor):
 def classroom(request, building_no, classroom_no):
     classroom = get_object_or_404(ClassRoom, building_no=building_no, room_no=classroom_no)
     return render(request, 'classroom.html', {'classroom' : classroom, 'room_name' : classroom.__str__})
+
+def search(request):
+    return render(request, 'search.html')

@@ -3,7 +3,7 @@
 {% block content%}
     <div class="classroom-search-box">
         빈 강의실 검색<br>
-        <form>
+        <form action="{% url 'search' %}">
             <input type="date">
             <input type="number">시 ~ <input type="number">시
             <input type="submit" value="검색">
