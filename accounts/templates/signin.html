@@ -3,8 +3,8 @@
 {% block content %}
 <div class="common-pg-contents">
     <div class="accounts-form-wrapper">
+		<div class="common-subheading">로그인</div>
 		<form action="{% url 'signin' %}" method="post" class="signin-form">
-			<div class="common-subheading">로그인</div>
 			{% csrf_token %}
 			{% for field in login_form %}
 				<div class="form-group">

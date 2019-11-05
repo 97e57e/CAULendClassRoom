@@ -3,8 +3,8 @@
 {% block content %}
 <div class="common-pg-contents">
     <div class="accounts-form-wrapper">
+        <div class="common-subheading">회원가입</div>
         <form method="POST" action="{% url 'signup'%}" class="signup-form">
-            <div class="common-subheading">회원가입</div>
             {% csrf_token %}
             <p>{{user_form.username}}</p>
             <p>{{user_form.password1}}</p>
@@ -14,6 +14,11 @@
             <p><input type="text" placeholder = "전화번호를 입력해 주세요 . 예)010-1234-5678" name = "phone_number"></p>
             <p><input type="date" name = "birth" placeholder="생일"></p>
             <p><input type="text" name = "dept_name" placeholder="학과를 입력 해 주세요"></p>
+            {% if user_form.non_field_errors %}
+                {% for error in user_form.non_field_errors %}
+                <p class="invalid-login-msg"><b>{{ error }}</b></p>
+                {% endfor %}
+            {% endif %}
             <input type="submit" value="제출">
         </form>
     </div>

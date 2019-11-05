@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}내정보 | {% endblock %}
 {% block content %}
+<div class="common-pg-contents">
     <p>내 정보</p>
     <p>아이디 : {{user_info.username}}</p>
     <p>이름 : {{user_info.profile.user_name}}</p>
@@ -11,5 +12,5 @@
 
     <button value="정보 수정" name="정보 수정"onclick="location.href='{% url 'edit_info' %}'">수정 하기</button>
     <button onclick="location.href='{% url 'book_manage' %}'">예약 관리</button>
-
+</div>
 {% endblock %}

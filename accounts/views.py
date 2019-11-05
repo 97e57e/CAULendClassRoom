@@ -24,13 +24,15 @@ def signup(request):
             user.profile.brith = request.POST['birth']
             user.profile.department = request.POST['dept_name']
             user.save()
-            print('회원가입 성공!')
             return redirect('signup_done')
-        return HttpResponseServerError('회원가입에 실패했습니다.')
+        user_form.add_error(None, '회원가입에 실패하였습니다.')
     else:
         user_form = CreateUserForm()
         profile_form = ProfileForm()
-    return render(request, 'signup.html', {'user_form' : user_form})
+    context = {
+        'user_form': user_form,
+    }
+    return render(request, 'signup.html', context)
 
 def signin(request):
     if request.method == 'POST':
