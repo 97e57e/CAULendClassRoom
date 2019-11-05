@@ -6,11 +6,7 @@ from .models import Profile
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
-        labels = {
-            'username' : '아이디 : ',
-            'email' : '이메일',
-        }
+        fields = ['username', 'password1', 'password2']
 
 class ProfileForm(forms.ModelForm):
     class Meta:

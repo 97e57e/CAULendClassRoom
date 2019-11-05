@@ -4,14 +4,14 @@
 <div>회원가입</div>
 <form method="POST" action="{% url 'signup'%}">
     {% csrf_token %}
-    {% for field in user_form%}
-        {{field.label}} : {{field}}<br>
-    {% endfor %}
-    이름 : <input type="text" name = "user_name"><br>
-    학번 : <input type="number" name = "user_code"><br>
-    전화번호 : <input type="text" placeholder = "010-1234-5678" name = "phone_number"><br>
-    생일 : <input type="date" name = "birth"><br>
-    학과 : <input type="text" name = "dept_name"><br>
+    <p>아이디 : {{user_form.username}}</p>
+    <p>비밀번호 : {{user_form.password1}}</p>
+    <p>비밀번호 확인 : {{user_form.password2}}</p>
+    <p>이름 : <input type="text" name = "user_name"></p>
+    <p>학번 : <input type="number" name = "user_code"></p>
+    <p>전화번호 : <input type="text" placeholder = "010-1234-5678" name = "phone_number"></p>
+    <p>생일 : <input type="date" name = "birth"></p>
+    <p>학과 : <input type="text" name = "dept_name"></p>
     <input type="submit" value="제출">
 </form>
 {% endblock %}
