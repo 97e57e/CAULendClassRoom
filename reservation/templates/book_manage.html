@@ -2,4 +2,20 @@
 {% block title %}예약 관리 |{% endblock %}
 {% block content%}
     <p>예약 관리 페이지</p>
+    <table>
+        <tr>
+            <th>예약번호</th>
+            <th>예약날짜</th>
+            <th>예약시간</th>
+        </tr>
+    {% for reservation in reservations %}
+        <tr>
+            <td>{{reservation.pk}}</td>
+            <td>{{reservation.date}}</td>
+            <td>{{reservation.start_time}} ~ {{reservation.end_time}}</td>
+            <td><button>예약수정</button></td>
+            <td><button>예약취소</button></td>
+        </tr>
+    {% endfor %}
+    </table>
 {% endblock %}
