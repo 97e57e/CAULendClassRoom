@@ -9,7 +9,7 @@ def index(request):
 def building(request, building_no, floor):
     building = get_object_or_404(Building, pk=building_no)
     rooms = ClassRoom.objects.filter(building_no=building_no, floor=floor)
-    return render(request, 'building.html', {'building' : building, 'rooms' : rooms, 'range' : range(1, building.max_floor+1)})
+    return render(request, 'building.html', {'building' : building, 'rooms' : rooms, 'current_floor' : floor, 'range' : range(1, building.max_floor+1)})
 
 def classroom(request, building_no, classroom_no):
     classroom = get_object_or_404(ClassRoom, building_no=building_no, room_no=classroom_no)

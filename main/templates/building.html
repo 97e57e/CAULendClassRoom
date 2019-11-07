@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}{{building.building_no}}관 | {% endblock %}
 {% block content%}
-    <div class="common-pg-contents">
-        <p class="common-subheading">'{{building.building_no}}' {{building}} </p>
-        {% for room in rooms%}
-            <p><a href="{% url 'classroom' building.building_no room.room_no %}">{{room.room_no}}호</a></p>
-        {% endfor %}
-        <br>
-        {% for i in range %}
-            <a href="{% url 'building' building.building_no i%}">{{i}}층</a>
-        {% endfor %}
+<div class="common-pg-contents">
+    <p class="common-subheading">'{{building.building_no}}' {{building}} </p>
+    <div id="floor-select-box">
+        <select onchange="location = this.options[this.selectedIndex].value;" >
+            {% for i in range %}
+                <option 
+                    {% if i == current_floor %}
+                        selected="selected"
+                    {% endif %}
+                value="{% url 'building' building.building_no i%}" >{{i}}층</option>
+            {% endfor %}
+        </select>
     </div>
+    {% for room in rooms%}
+        <p><a href="{% url 'classroom' building.building_no room.room_no %}">{{room.room_no}}호</a></p>
+    {% endfor %}
+    <br>
+</div>
 {% endblock %}

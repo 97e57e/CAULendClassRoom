@@ -3,6 +3,7 @@ from django.db import models
 class Building(models.Model):
     building_no = models.CharField(max_length=3, primary_key=True)
     building_name = models.CharField(max_length=10)
+    min_floor = models.IntegerField(default=0)
     max_floor = models.IntegerField(default=0)
 
     def __str__(self):
