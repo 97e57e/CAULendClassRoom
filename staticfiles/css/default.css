@@ -22,19 +22,12 @@ body {
 }
 
 /*******************Common********************/
-
-/*****************IndexPage*******************/
-.classroom-search-box{
+.common-pg-contents{
     border: 1px solid black;
-    width: 900px;
-    height: 80px;
-    margin: 0 auto 0 auto;
-    text-align: center;
+    width: 800px;
+    margin: 10px auto;
 }
 
-.cau-map-view{
-    border: 1px solid black;
-    width: 900px;
-    height: 500px;
-    margin: 0 auto 0 auto;
+.common-subheading{
+    text-align: center;
 }
