@@ -13,7 +13,14 @@
     <div class="reservation-contents">
         <div class="present-reservation-list">
         {% for reservation in reservations %}
-            {{reservation}} ~ {{reservation.end_time}}까지<br>
+            <p>
+                {{reservation}} ~ {{reservation.end_time}}까지
+                {% if reservation.status is 0%}
+                예약대기
+                {% elif reservation.status is 1%}
+                예약
+                {% endif %}
+            </p>
         {% endfor %}
         </div>
 
@@ -22,7 +29,7 @@
                 {% csrf_token %}
                 <p> - 예약 날짜 : <input type="text" name="date"></p>
                 <p> - 예약 시간 :
-                    <select>
+                    <select name="start-hour">
                         <option selected>--</option>
                         <option>18</option>
                         <option>19</option>
@@ -30,7 +37,7 @@
                         <option>21</option>
                     </select>
                     :
-                    <select>
+                    <select name="start-min">
                         <option selected>--</option>
                         <option>00</option>
                         <option>10</option>
@@ -39,7 +46,7 @@
                         <option>40</option>
                         <option>50</option>
                     </select> ~
-                    <select>
+                    <select name="end-hour">
                         <option selected>--</option>
                         <option>18</option>
                         <option>19</option>
@@ -47,7 +54,7 @@
                         <option>21</option>
                     </select>
                     :
-                    <select>
+                    <select name="end-min">
                         <option selected>--</option>
                         <option>00</option>
                         <option>10</option>

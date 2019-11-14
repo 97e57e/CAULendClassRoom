@@ -10,7 +10,7 @@ class Building(models.Model):
         return self.building_name
 
 class ClassRoom(models.Model):
-    building_no = models.ForeignKey(Building, db_column='building_no', on_delete=models.CASCADE)
+    building_no = models.ForeignKey(Building, db_column='building_no_id', on_delete=models.CASCADE)
     room_no = models.CharField(max_length=4)
     floor = models.IntegerField(default=1)
     capacity = models.IntegerField(default=0)
