@@ -11,7 +11,6 @@
     </div>
 
     <div class="cau-map-view">
-        <a href="{% url 'building' 310 1%}">310관</a><br>
         {% for building in buildings %}
             {{building.building_no}}관 : <a href="{% url 'building' building.building_no 1 %}">{{building.building_name}}</a><br>
         {% endfor %}

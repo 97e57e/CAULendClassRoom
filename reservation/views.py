@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+import datetime
 from .models import Reservation
 from main.models import ClassRoom
 from main.models import Building
@@ -24,7 +25,8 @@ def reservation(request, building_no, classroom_no):
 			reservation.save()
 		return redirect('book_manage')
 	else:
-		reservations = Reservation.objects.filter(room_no = classroom.id, date="2019-11-01").order_by('end_time')
+		now = datetime.datetime.now()
+		reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
 		print(reservations)
 		return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations})
 
@@ -32,3 +34,14 @@ def book_manage(request):
     reservations = Reservation.objects.filter(user = request.user).order_by('-pk')
     print(reservations)
     return render(request, 'book_manage.html', {'reservations' : reservations})
+
+def manager(request):
+	applied_reservations = Reservation.objects.filter(status=0).order_by('-id')
+	confirmed_reservations = Reservation.objects.filter(status=1).order_by('-id')
+	return render(request, 'manager_page.html', {'applied_reservations' : applied_reservations, 'confirmed_reservations' : confirmed_reservations})
+
+def reservation_confirm(request, reservation_id):
+	update_reservation = Reservation.objects.get(id=reservation_id)
+	update_reservation.status = 1
+	update_reservation.save()
+	return redirect('manager_page')

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}관리자용 페이지 |{% endblock %}
+{% block content%}
+<div class="common-pg-contents">
+    <p class="common-subheading">예약 관리 페이지</p>
+    <div class="reservation-contents">
+        <div class="applied-reservations-list">
+            <p class="common-subheading">예약 요청 목록</p>
+            {% for reservation in applied_reservations%}
+                <p class="applied-item">
+                    <a href="#" class="applied-item-detail">{{reservation}} 요청</a>
+                    <form class="applied-item-confirm" method="POST" action="{% url 'reservation_confirm' reservation.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="승인">
+                    </form>
+                    <form class="applied-item-deny" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="거절">
+                    </form>
+                </p>
+            {% endfor %}
+        </div>
+        <div class="confirmed-reservations-list">
+            <p class="common-subheading">승인된 예약 목록</p>
+            {% for reservation in confirmed_reservations%}
+                <p class="confirmed-item">
+                    {{reservation}}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
