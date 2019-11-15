@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}예약 상세 |{% endblock %}
+{% block content%}
+<div class="common-pg-contents">
+    <p class="common-subheading">예약 상세 페이지</p>
+    <p>{{reservation}}</p>
+    <p>{{reservation.user.profile.department}}</p>
+    <p>신청인 : {{reservation.user.profile.user_name}}</p>
+    <p>예약 호실 : {{reservation.room_no}}</p>
+    <p>예약 날짜 :{{reservation.date}}</p>
+    <p>이용 목적 : {{reservation.purpose}}</p>
+    <p>예약 시간 : {{reservation.start_time}} ~ {{reservation.end_time}}</p>
+    <p>상태 : 승인 대기</p>
+    <form class="applied-item-confirm" method="POST" action="{% url 'reservation_confirm' reservation.id %}">
+            {% csrf_token %}
+            <input type="submit" value="승인">
+    </form>
+    <form class="applied-item-deny" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="거절">
+    </form>
+
+</div>
+{% endblock %}

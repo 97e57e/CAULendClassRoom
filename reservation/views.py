@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView
 import datetime
 from .models import Reservation
 from main.models import ClassRoom
@@ -22,6 +23,8 @@ def reservation(request, building_no, classroom_no):
 			reservation.end_time = end_time
 			reservation.user = request.user
 			reservation.date = request.POST['date']
+			reservation.personnel = request.POST.get('personnel')
+			reservation.purpose = request.POST.get('purpose')
 			reservation.save()
 		return redirect('book_manage')
 	else:
@@ -45,3 +48,7 @@ def reservation_confirm(request, reservation_id):
 	update_reservation.status = 1
 	update_reservation.save()
 	return redirect('manager_page')
+
+class reservationDetail(DetailView):
+	model = Reservation
+	template_name='reservation_detail.html'

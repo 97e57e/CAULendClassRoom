@@ -9,6 +9,7 @@ class Reservation(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     status = models.IntegerField(default=0)
+    personnel = models.IntegerField(default=0)
     purpose = models.TextField(max_length=500)
 
     def __str__(self):

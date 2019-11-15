@@ -8,15 +8,7 @@
             <p class="common-subheading">예약 요청 목록</p>
             {% for reservation in applied_reservations%}
                 <p class="applied-item">
-                    <a href="#" class="applied-item-detail">{{reservation}} 요청</a>
-                    <form class="applied-item-confirm" method="POST" action="{% url 'reservation_confirm' reservation.id %}">
-                        {% csrf_token %}
-                        <input type="submit" value="승인">
-                    </form>
-                    <form class="applied-item-deny" method="POST">
-                        {% csrf_token %}
-                        <input type="submit" value="거절">
-                    </form>
+                    <a href="{% url 'detail' reservation.id %}" class="applied-item-detail">{{reservation}} 요청</a>
                 </p>
             {% endfor %}
         </div>
