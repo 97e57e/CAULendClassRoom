@@ -16,7 +16,7 @@
             {% csrf_token %}
             <input type="submit" value="승인">
     </form>
-    <form class="applied-item-deny" method="POST">
+    <form class="applied-item-deny" method="POST" action="{% url 'reservation_deny' reservation.id %}"">
         {% csrf_token %}
         <input type="submit" value="거절">
     </form>

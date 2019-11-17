@@ -14,3 +14,19 @@ class Reservation(models.Model):
 
     def __str__(self):
         return self.user.profile.user_name + "의 예약"
+
+    def wait(self):
+        self.status = 0
+        self.save()
+
+    def confirm(self):
+        self.status = 1
+        self.save()
+
+    def request_modify(self):
+        self.status = 2
+        self.save()
+
+    def request_deny(self):
+        self.status=3
+        self.save()

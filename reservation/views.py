@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
 from django.views.generic import DetailView
 import datetime
 from .models import Reservation
@@ -49,9 +49,15 @@ def manager(request, building_no):
 
 def reservation_confirm(request, reservation_id):
 	update_reservation = Reservation.objects.get(id=reservation_id)
-	update_reservation.status = 1
-	update_reservation.save()
-	return redirect('manager_page')
+	update_reservation.room_no.building_no.sub_new_request()
+	update_reservation.confirm()
+	return redirect('manager_page', update_reservation.room_no.building_no.pk)
+
+def reservation_deny(request, reservation_id):
+	update_reservation = Reservation.objects.get(id=reservation_id)
+	update_reservation.room_no.building_no.sub_new_request()
+	update_reservation.deny()
+	return redirect('manager_page', update_reservation.room_no.building_no.pk)
 
 class reservationDetail(DetailView):
 	model = Reservation
