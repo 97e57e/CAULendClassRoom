@@ -25,6 +25,7 @@ def reservation(request, building_no, classroom_no):
 			reservation.date = request.POST['date']
 			reservation.personnel = request.POST.get('personnel')
 			reservation.purpose = request.POST.get('purpose')
+			print(classroom.building_no.building_no)
 			reservation.save()
 		return redirect('book_manage')
 	else:
@@ -38,7 +39,11 @@ def book_manage(request):
     print(reservations)
     return render(request, 'book_manage.html', {'reservations' : reservations})
 
-def manager(request):
+def manager_select_building(request):
+	buildings = Building.objects.all()
+	return render(request, 'manager_select_building.html', {'buildings' : buildings})
+
+def manager(request, building_no):
 	applied_reservations = Reservation.objects.filter(status=0).order_by('-id')
 	confirmed_reservations = Reservation.objects.filter(status=1).order_by('-id')
 	return render(request, 'manager_page.html', {'applied_reservations' : applied_reservations, 'confirmed_reservations' : confirmed_reservations})

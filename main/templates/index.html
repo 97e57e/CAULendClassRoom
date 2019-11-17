@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{% endblock %}
 {% block content%}
+<div class="common-pg-contetns">
     <div class="classroom-search-box">
         빈 강의실 검색<br>
         <form action="{% url 'search' %}">
@@ -15,4 +16,5 @@
             {{building.building_no}}관 : <a href="{% url 'building' building.building_no 1 %}">{{building.building_name}}</a><br>
         {% endfor %}
     </div>
+</div>
 {% endblock %}

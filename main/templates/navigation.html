@@ -8,7 +8,7 @@
             {% if user.profile.userType == 'student' %}
                 <a href="{% url 'book_manage' %}">내 예약</a>
             {% elif user.profile.userType == 'manager' %}
-                <a href="{% url 'manager_page' %}">예약 관리 페이지</a>
+                <a href="{% url 'manager_select_building' %}">예약 관리 페이지</a>
             {% endif %}
 
             <a href="{% url 'logout' %}">로그아웃</a>
