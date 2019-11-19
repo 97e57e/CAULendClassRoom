@@ -15,7 +15,7 @@
 				  <h3 class="card-title text-center">로그인</h3>
 				  <br>
 	  
-				  <form class="form-signin">
+				  <form action="{% url 'signin' %}" method="post" class="form-signin">
 					{% csrf_token %}
 	  
 					<div class="form-label-group">
@@ -36,7 +36,7 @@
 					  <input type="checkbox" class="custom-control-input" id="customCheck1">
 					  <label class="custom-control-label" for="customCheck1">비밀번호 기억</label>
 					</div>
-					<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">접속</button>
+					<button class="btn btn-primary btn-block">로그인</button>
 	  
 				  </form>
 	  
