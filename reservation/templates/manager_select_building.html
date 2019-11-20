@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}관리자용 페이지 |{% endblock %}
+{% block content%}
+<div class="common-pg-contents">
+    <p class="common-subheading">예약 관리 페이지</p>
+    
+    {% for building in buildings %}
+        {{building.building_no}}관 : <a href="{% url 'manager_page' building.building_no %}">{{building.building_name}}</a>
+        새로운 예약 요청 : {{building.new_request_reservation}}<br>
+    {% endfor %}
+        
+</div>
+{% endblock %}

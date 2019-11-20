@@ -1,0 +1,33 @@
+/**********Common************/
+.reservation-contents{
+    width: 100%;
+}
+
+.reservation-contents .present-reservation-list,
+.reservation-contents .applied-reservations-list{
+    position: relative;
+    width: 50%;
+    float: left;
+}
+
+.reservation-contents .reservation-form-wrapper,
+.reservation-contents .confirmed-reservations-list{
+    position: relative;
+    width: 50%;
+    float: right;
+}
+
+/***********ManagerPage************/
+.applied-item{
+    text-align: center;
+}
+.confirmed-item{
+    text-align: center;
+}
+
+.applied-item-detail{
+    /* float: left; */
+}
+.applied-item-confirm{
+    float: left;
+}

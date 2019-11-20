@@ -1,0 +1,92 @@
+{% extends 'signbase.html' %}
+{% block title %}회원가입 | {% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          
+            <div class="col-lg-7 m-auto">
+              <div class="p-5">
+
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
+                  </div>
+    
+                  <form method="POST" action="{% url 'signup'%}" class="user">
+
+                    {% csrf_token %}
+                    <p>{{user_form.username}}</p>
+                    <p>{{user_form.password1}}</p>
+                    <p>{{user_form.password2}}</p>
+    
+                    <div class="form-group">
+                      <input type="number" class="form-control form-control-user" name="user_code" placeholder="학번 / 교번">
+                    </div>
+    
+                    <div class="form-group row">
+    
+                      <div class="col-sm-3 ">
+                        <div class="form-group">
+                          <select class="form-control" id="exampleSelect1">
+                            <option>010</option>
+                            <option>011</option>
+                          </select>
+                        </div>
+                      </div>
+    
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-user" name="phone_number" placeholder="전화번호">
+                      </div>
+    
+                    </div>
+    
+                    <hr>
+                    <br>
+    
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" name="user_name" placeholder="이름 *">
+                    </div>
+    
+                    <div class="form-group">
+                      <input type="date" class="form-control form-control-user" name="birth" placeholder="생년월일 ex) 940422">
+                    </div>
+    
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" name="dept_name" placeholder="소속 *">
+                    </div>
+    
+                    {% if user_form.non_field_errors %}
+                      {% for error in user_form.non_field_errors %}
+                      <p class="invalid-login-msg"><b>{{ error }}</b></p>
+                      {% endfor %}
+                    {% endif %}
+    
+                    <input type="submit" value="제출" class="btn btn-primary btn-user btn-block">
+                    <!--<a href="{% url 'signin' %}" class="btn btn-primary btn-user btn-block">가입하기</a>-->
+    
+                  </form>
+    
+                  <hr>
+                  
+                  <div class="text-center">
+                    <a class="small" href="{% url 'signin' %}">이미 회원이신가요? 로그인 하세요!</a>
+                  </div>
+
+              </div>
+            </div>
+          </div>  
+        </div>
+
+    </div>
+  </div>
+</div>
+    
+
+<!--  Jquery 소스 임포트-->
+    <script src ="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+{% endblock %}
