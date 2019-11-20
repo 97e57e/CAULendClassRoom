@@ -8,20 +8,23 @@ class CreateUserForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': '아이디를 입력해 주세요.',
+                'class': 'form-control form-control-user',
             }
         )
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                'placeholder': '비밀번호를 입력해 주세요.',
+                'placeholder': '비밀번호 *',
+                'class': 'form-control form-control-user',
             }
         )
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                'placeholder': '비밀번호를 한 번 더 입력해 주세요.',
+                'placeholder': '비밀번호 확인 *',
+                'class': 'form-control form-control-user',
             }
         )
     )
