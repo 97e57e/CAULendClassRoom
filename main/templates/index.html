@@ -27,7 +27,6 @@
 			</form>
 		</div>
 	<div class="col-md-3"></div>
-	
     <div class="classroom-search-box">
         빈 강의실 검색<br>
         <form action="{% url 'search' %}">
@@ -38,7 +37,6 @@
     </div>
 
     <div class="cau-map-view">
-        <a href="{% url 'building' 310 1%}">310관</a><br>
         {% for building in buildings %}
             {{building.building_no}}관 : <a href="{% url 'building' building.building_no 1 %}">{{building.building_name}}</a><br>
         {% endfor %}
