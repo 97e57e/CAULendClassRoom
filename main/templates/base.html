@@ -1,22 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	
 	<script src ="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/custom.min.css' %}">
 	<script src="{% static 'js/bootstrap.js' %}"></script>
+	
+	<title>{% block title %}{% endblock%} CAU Lend</title>
+	</head>
+	<body>
+		{% block navigation %} {% include 'navigation.html' %} {% endblock %}
 		
-    <title>{% block title %}{% endblock%} CAU Lend</title>
-</head>
-<body>
-    {% block navigation %} {% include 'navigation.html' %} {% endblock %}
-    
-    <div class="content-wrapper">{% block content %} {% endblock %}</div>
-
-    {% block footer %}{% include 'footer.html' %} {% endblock %}
-</body>
+		<div class="content-wrapper">{% block content %} {% endblock %}</div>
+		
+		{% block footer %}{% include 'footer.html' %} {% endblock %}
+	</body>
 </html>
