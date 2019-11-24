@@ -1,15 +1,60 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}검색 | {% endblock %}
 {% block content%}
-<div class="classroom-search-box">
-    빈 강의실 검색<br>
-    <form action="{% url 'search' %}">
-        <input type="date">
-        <input type="number">시 ~ <input type="number">시
-        <input type="submit" value="검색">
-    </form>
-</div>
+<script src="{% static 'js/ckeckSearchForm.js' %}"></script>
 
+<div class = "container-fluid">
+	<br><br>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6"><h1>빈 강의실 검색</h1>
+			<hr>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			
+			<form onsubmit="return validate();" action="{% url 'search' %}" class="row">
+				
+				<div class="col-md-2 form-group">
+					<label for="month">월</label>
+					<input type="month" class="form-control" id="month" required>
+				</div>
+				
+				<div class="col-md-2 form-group">
+					<label for="day">일</label>
+					<input type="day" class="form-control" id="day" required>
+				</div>
+				
+				<div class="col-md-3 form-group">
+					<label for="s_time">시작시간</label>
+					<input type="time" class="form-control" id="s_time" required>
+				</div>
+				
+				<div class="col-md-3 form-group">
+					<label for="building">건물</label>
+					<select class="form-control" id="building">
+						{% for building in buildings %}
+							<option value="{{building.building_no}}">
+								{{building.building_no}}
+							</option>
+						{% endfor %}
+					<select>
+				</div>
+				
+				<div class="col-md-2 form-group">
+					<button type="submit" class="btn btn-secondary">
+						검색
+					</button>
+				</div>
+			</form>
+			
+		</div>
+	<div class="col-md-3"></div>
+</div>
 <div class="common-pg-contents">
     <p>검색 결과</p>
 </div>

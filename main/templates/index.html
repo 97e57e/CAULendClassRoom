@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}{% endblock %}
 {% block content%}
+<script src="{% static 'js/ckeckSearchForm.js' %}"></script>
+
 <div class = "container-fluid">
 	<br><br>
 	<div class="row">
@@ -13,40 +16,65 @@
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
+			
 			<form onsubmit="return validate();" action="{% url 'search' %}" class="row">
+				
 				<div class="col-md-2 form-group">
 					<label for="month">월</label>
-					<input type="month" class="form-control" id="month">
+					<input type="month" class="form-control" id="month" required>
 				</div>
+				
 				<div class="col-md-2 form-group">
 					<label for="day">일</label>
-					<input type="day" class="form-control" id="day">
+					<input type="day" class="form-control" id="day" required>
 				</div>
+				
 				<div class="col-md-3 form-group">
 					<label for="s_time">시작시간</label>
-					<input type="time" class="form-control" id="s_time">
+					<input type="time" class="form-control" id="s_time" required>
 				</div>
+				
 				<div class="col-md-3 form-group">
 					<label for="building">건물</label>
 					<select class="form-control" id="building">
-						<option value="310">310</option>
-						<option value="208">208</option>
-						<option value="207">207</option>
+						{% for building in buildings %}
+							<option value="{{building.building_no}}">
+								{{building.building_no}}
+							</option>
+						{% endfor %}
 					<select>
 				</div>
+				
 				<div class="col-md-2 form-group">
 					<button type="submit" class="btn btn-secondary">
 						검색
 					</button>
 				</div>
 			</form>
+			
 		</div>
 	<div class="col-md-3"></div>
-
-    <div class="cau-map-view">
-        {% for building in buildings %}
-            {{building.building_no}}관 : <a href="{% url 'building' building.building_no 1 %}">{{building.building_name}}</a><br>
-        {% endfor %}
-    </div>
 </div>
+
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6"><br><hr></div>
+	<div class="col-md-3"></div>
+</div>
+
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<img style="height: auto; width: 100%; display: block;" src="{% static 'image/map.jpg' %}">
+	</div>
+	<div class="col-md-3"></div>
+</div>
+
+<div class="cau-map-view">
+		{% for building in buildings %}
+				{{building.building_no}}관 : <a href="{% url 'building' building.building_no 1 %}">{{building.building_name}}</a><br>
+		{% endfor %}
+</div>
+		
+
 {% endblock %}
