@@ -1,19 +1,40 @@
 {% extends 'base.html' %}
 {% block title %}정보 수정 | {% endblock %}
 {% block content %}
-<div class="common-pg-contents">
-    <p>내 정보</p>
-    <p>아이디 : {{user_info.username}}</p>
-    <p>이름 : {{user_info.profile.user_name}}</p>
-    <p>학번 : {{user_info.profile.user_code}}</p>
-    <p>학과 : {{user_info.profile.department}}</p>
-    <form method="POST" action="{% url 'request_edit_info'%}">
-        {% csrf_token %}
-        <p>생일 : <input type="date" name = 'edit_birth'></p>
-        <p>전화번호 : <input type="text" value="{{user_info.profile.phone_number}}" name='edit_phone_number'></p>
-        <input type="submit" value="정보 수정">
-    </form>
-
-    <button onclick="location.href='{% url 'my_info' %}'">취소</button>
+<div class = "container-fluid">
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+  
+  
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h2 class="card-title text-center">내 정보</h2>
+              <br>
+              
+              <p>아이디 : {{user_info.username}}</p>
+              <p>이름 : {{user_info.profile.user_name}}</p>
+              <p>학번 : {{user_info.profile.user_code}}</p>
+              <p>학과 : {{user_info.profile.department}}</p>
+              <form method="POST" action="{% url 'request_edit_info'%}">
+                {% csrf_token %}
+                <p>생일 : <input type="date" name = 'edit_birth'></p>
+                <p>전화번호 : <input type="text" value="{{user_info.profile.phone_number}}" name='edit_phone_number'></p>
+                <br>
+                <input class="btn btn-primary btn-block" type="submit" value="정보 수정">
+              </form>
+              
+              <br>
+              <button class="btn btn-primary btn-block" onclick="location.href='{% url 'my_info' %}'">취소</button>
+  
+            </div>
+          </div>
+  
+  
+        </div>
+      </div>
+    </div>
 </div>
 {% endblock %}
