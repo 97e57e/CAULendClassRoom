@@ -16,4 +16,8 @@ def classroom(request, building_no, classroom_no):
     return render(request, 'classroom.html', {'classroom' : classroom, 'room_name' : classroom.__str__})
 
 def search(request):
+    print(request.POST.get('date'))
+    print(request.POST.get('start_time'))
+    print(request.POST.get('end_time'))
+    print(request.POST.get('building'))
     return render(request, 'search.html')
