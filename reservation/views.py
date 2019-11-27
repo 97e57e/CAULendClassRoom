@@ -38,9 +38,12 @@ def book_manage(request):
     return render(request, 'book_manage.html', {'reservations' : reservations})
 
 def manager_select_building(request):
-	buildings = Building.objects.all()
+	buildings1 = Building.objects.all()[0:5]
+	buildings2 = Building.objects.all()[5:10]
+	buildings3 = Building.objects.all()[10:15]
+	buildings4 = Building.objects.all()[15:20]
 			
-	return render(request, 'manager_select_building.html', {'buildings' : buildings})
+	return render(request, 'manager_select_building.html', {'buildings1' : buildings1, 'buildings2' : buildings2, 'buildings3' : buildings3, 'buildings4' : buildings4})
 
 def manager(request, building_no):
 	applied_reservations = Reservation.objects.filter(status=0).order_by('-id')
