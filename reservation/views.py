@@ -69,6 +69,9 @@ def reservation_deny(request, reservation_id):
 	update_reservation.deny()
 	return redirect('manager_page', update_reservation.room_no.building_no.pk)
 
+def reservation_cancel(request):
+	return redirect('book_manage')
+
 class reservationDetail(DetailView):
 	model = Reservation
 	template_name='reservation_detail.html'

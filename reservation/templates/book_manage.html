@@ -31,9 +31,16 @@
                             <td>{{reservation.start_time}}</td>
                             <td>{{reservation.end_time}}</td>
                             <td>{{reservation.personnel}}</td>
-                            <td>{{reservation.status}}</td>
+                            <td>{% if reservation.status is 1%}
+                                  예약 승인
+                                {% elif reservation.status is 0%}
+                                  승인 대기중
+                                {% elif reservation.status is 2%}
+                                  예약 거절
+                                {% endif %}
+                            </td>
                             <td><button class="btn btn-primary btn-block">예약수정</button></td>
-                            <td><button class="btn btn-primary btn-block">예약취소</button></td>
+                            <td><button onclick = "location.href='{% url 'reservation_cancel' %}'"class="btn btn-primary btn-block">예약취소</button></td>
                         </tr>
                     {% endfor %}
                 </tbody>
