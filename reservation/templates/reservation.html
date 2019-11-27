@@ -7,6 +7,13 @@
         window.location.href = '{% url 'signin' %}';
     </script>
 {% endif %}
+<!-- {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %} -->
 <div class="common-pg-contents">
     <p class="common-subheading">예약 페이지</p>
 
@@ -69,6 +76,7 @@
                     - 이용목적
                 <p><textarea cols="50" rows="10" name="purpose"></textarea></p>
                 <!-- <p>첨부파일 : </p> -->
+                
                 <p><input type="submit" value="제출"></p>
             </form>
         </div>
