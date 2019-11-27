@@ -7,7 +7,7 @@ class CreateUserForm(UserCreationForm):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'placeholder': '아이디를 입력해 주세요.',
+                'placeholder': '이메일을 입력해 주세요.',
                 'class': 'form-control form-control-user',
             }
         )
