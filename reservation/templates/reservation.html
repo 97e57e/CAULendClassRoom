@@ -13,7 +13,6 @@
     {% endfor %}
 {% endif %}
 <div class="common-pg-contents">
-    <p class="common-subheading">예약 페이지</p>
 
     <div class="reservation-contents">
         <div class="present-reservation-list">
@@ -29,55 +28,86 @@
         {% endfor %}
         </div>
 
-        <div class="reservation-form-wrapper">
-            <form method="POST" action="{% url 'reservation' classroom.building_no.building_no classroom.room_no %}">
-                {% csrf_token %}
-                <p> - 예약 날짜 : <input type="text" name="date"></p>
-                <p> - 예약 시간 :
-                    <select name="start-hour">
-                        <option selected>--</option>
-                        <option>18</option>
-                        <option>19</option>
-                        <option>20</option>
-                        <option>21</option>
-                    </select>
-                    :
-                    <select name="start-min">
-                        <option selected>--</option>
-                        <option>00</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>30</option>
-                        <option>40</option>
-                        <option>50</option>
-                    </select> ~
-                    <select name="end-hour">
-                        <option selected>--</option>
-                        <option>18</option>
-                        <option>19</option>
-                        <option>20</option>
-                        <option>21</option>
-                    </select>
-                    :
-                    <select name="end-min">
-                        <option selected>--</option>
-                        <option>00</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>30</option>
-                        <option>40</option>
-                        <option>50</option>
-                    </select>
-                </p>
-                <p> - 예약자 : {{user.profile.user_name}}</p>
-                <p> - 인원 : <input type="number" name="personnel"></p>
-                    - 이용목적
-                <p><textarea cols="50" rows="10" name="purpose"></textarea></p>
-                <!-- <p>첨부파일 : </p> -->
-                
-                <p><input type="submit" value="제출"></p>
-            </form>
+        <div class="container">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    
+                      <div class="col-lg-7 m-auto">
+                        <div class="p-5">
+          
+                            <div class="text-center">
+                              <h1 class="h4 text-gray-900 mb-4">예약 페이지</h1>
+                            </div>
+              
+                            <form method="POST" action="{% url 'reservation' classroom.building_no.building_no classroom.room_no %}">
+                                {% csrf_token %}
+                                <p> - 예약 날짜 : <input type="text" name="date"></p>
+                                <p> - 예약 시간 :
+                                    <select name="start-hour" class="btn-secondary">
+                                        <option selected>--</option>
+                                        <option>18</option>
+                                        <option>19</option>
+                                        <option>20</option>
+                                        <option>21</option>
+                                    </select>
+                                    :
+                                    <select name="start-min" class="btn-secondary">
+                                        <option selected>--</option>
+                                        <option>00</option>
+                                        <option>10</option>
+                                        <option>20</option>
+                                        <option>30</option>
+                                        <option>40</option>
+                                        <option>50</option>
+                                    </select> ~
+                                    <select name="end-hour" class="btn-secondary">
+                                        <option selected>--</option>
+                                        <option>18</option>
+                                        <option>19</option>
+                                        <option>20</option>
+                                        <option>21</option>
+                                    </select>
+                                    :
+                                    <select name="end-min" class="btn-secondary">
+                                        <option selected>--</option>
+                                        <option>00</option>
+                                        <option>10</option>
+                                        <option>20</option>
+                                        <option>30</option>
+                                        <option>40</option>
+                                        <option>50</option>
+                                    </select>
+                                </p>
+                                <p> - 예약자 : {{user.profile.user_name}}</p>
+                                <p> - 인원 : <input type="number" name="personnel"></p>
+                                    - 이용목적
+                                <p><textarea cols="50" rows="10" name="purpose"></textarea></p>
+                                <!-- <p>첨부파일 : </p> -->
+                                
+                                <p><input class="btn btn-secondary btn-block" type="submit" value="제출"></p>
+                            </form>
+              
+                            <hr>
+                            
+                            <div class="text-center">
+                              <a class="small" href="{% url 'signin' %}">이미 회원이신가요? 로그인 하세요!</a>
+                            </div>
+          
+                        </div>
+                      </div>
+                    </div>  
+                  </div>
+          
+              
+            </div>
         </div>
+
     </div>
 </div>
+
+  <!--  Jquery 소스 임포트-->
+      <script src ="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script src="js/bootstrap.js"></script>
 {% endblock %}
