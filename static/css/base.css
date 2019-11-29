@@ -2149,6 +2149,9 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 1rem;
+  padding: 10px;
+  border : 2px solid gray;
+  border-radius : 8px;
 }
 
 .form-text {
