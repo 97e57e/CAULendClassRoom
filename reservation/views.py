@@ -50,9 +50,12 @@ def manager_select_building(request):
 	return render(request, 'manager_select_building.html', {'buildings1' : buildings1, 'buildings2' : buildings2, 'buildings3' : buildings3, 'buildings4' : buildings4})
 
 def manager(request, building_no):
+	# building = Building.objects.get(building_no = building_no)
+	# rooms = building.entry_set.all
+	# print(rooms)
 	applied_reservations = Reservation.objects.filter(status=0).order_by('-id')
 	confirmed_reservations = Reservation.objects.filter(status=1).order_by('-id')
-	return render(request, 'manager_page.html', {'applied_reservations' : applied_reservations, 'confirmed_reservations' : confirmed_reservations})
+	return render(request, 'manager_page.html', {'applied_reservations' : applied_reservations, 'confirmed_reservations' : confirmed_reservations, 'building_no' : building_no})
 
 def reservation_confirm(request, reservation_id):
 	update_reservation = Reservation.objects.get(id=reservation_id)
@@ -76,7 +79,7 @@ class reservationDetail(DetailView):
 # 	if request.method == 'POST':
 # 		form = PasswordChangeForm(request.user, request.POST)
 # 		if form.is_valid():
-# 			form.save()
+    # 			form.save()
 # 			update_session_auth_hash(request, form.user)
 # 			messages.success(request, 'Your password was updated successfully!')  # <-
 # 			return redirect('settings:password')
