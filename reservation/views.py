@@ -5,7 +5,7 @@ from .models import Reservation
 from main.models import ClassRoom
 from main.models import Building
 from .reserve_valid_chk import is_reservation_valid
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from django.contrib import messages
 
 def reservation(request, building_no, classroom_no):
@@ -31,7 +31,10 @@ def reservation(request, building_no, classroom_no):
 			reservation.save()
 			return redirect('book_manage')
 		else:
-			return render(request, '예약이 불가능 합니다.')
+			messages.info(request, '예약이 불가능합니다.')
+			now = datetime.datetime.now()
+			reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
+			return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations})
 	else:
 		now = datetime.datetime.now()
 		reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
@@ -68,6 +71,9 @@ def reservation_deny(request, reservation_id):
 	update_reservation.room_no.building_no.sub_new_request()
 	update_reservation.deny()
 	return redirect('manager_page', update_reservation.room_no.building_no.pk)
+
+def reservation_cancel(request):
+	return redirect('book_manage')
 
 class reservationDetail(DetailView):
 	model = Reservation
