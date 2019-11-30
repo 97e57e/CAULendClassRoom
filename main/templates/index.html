@@ -19,12 +19,12 @@
 			
 			<form method="POST" onsubmit="return validate();" action="{% url 'search' %}" class="row" style="text-align: center; margin-left: 35px;">
 				{% csrf_token %}
-				<div class="col-md-3.5 form-group">
+				<div class="col-md-3.5 ">
 					<label for="month">날짜</label>
 					<input type="date" name="date" class="form-control" id="month" required>
 				</div>
 				
-				<div class="col-md-2 form-group">
+				<div class="col-md-2 ">
 					<label for="s_time">시작시간</label>
 					<!-- <input type="time" class="form-control" id="s_time" required> -->
 					<select class="form-control" id="s_time" name="start_time">
@@ -35,7 +35,7 @@
 					<select>
 				</div>
 
-				<div class="col-md-2 form-group">
+				<div class="col-md-2 ">
 					<label for="s_time">종료시간</label>
 					<!-- <input type="time" class="form-control" id="s_time" required> -->
 					<select class="form-control" id="s_time" name="end_time">
@@ -46,7 +46,7 @@
 					<select>
 				</div>
 				
-				<div class="col-md-2 form-group">
+				<div class="col-md-2 ">
 					<label for="building">건물</label>
 					<select class="form-control" id="building" name="building">
 						{% for building in buildings %}
@@ -57,7 +57,7 @@
 					<select>
 				</div>
 				
-				<div class="col-md-2 form-group">
+				<div class="col-md-2 ">
 					<button type="submit" class="btn btn-secondary" style="margin-top:30px;">
 						검색
 					</button>

@@ -5,7 +5,9 @@
         <p class="common-subheading">{{room_name}}</p>
         <div class="reservation-calendar">
             달력 들어갈 자리
-            <p><a href="{% url 'reservation' classroom.building_no.building_no classroom.room_no%}">예약하기</a></p>
+            <form method="GET" action="{% url 'reservation' classroom.building_no.building_no classroom.room_no %}">
+                <input type="submit" value="2019-11-30" name="date">
+            </form>
         </div>
     </div>
 {% endblock %}

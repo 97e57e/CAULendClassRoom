@@ -13,18 +13,16 @@ def reservation(request, building_no, classroom_no):
 	if request.method == "POST":
 		#TODO 시간 formatting 함수화 시킬것, reservation form 으로 받을 것
 		s_hour = request.POST['start-hour']
-		s_min = request.POST['start-min']
 		e_hour = request.POST['end-hour']
-		e_min = request.POST['end-min']
-		start_time = s_hour + ":" + s_min
-		end_time = e_hour + ":" + e_min
+		start_time = s_hour + ":00"
+		end_time = e_hour + ":00"
 		reservation = Reservation()
-		if is_reservation_valid(classroom.id, request.POST['date'], start_time, end_time):
+		if is_reservation_valid(classroom.id, request.POST.get('date'), start_time, end_time):
 			reservation.room_no = classroom
 			reservation.start_time = start_time
 			reservation.end_time = end_time
 			reservation.user = request.user
-			reservation.date = request.POST['date']
+			reservation.date = request.POST.get('date')
 			reservation.personnel = request.POST.get('personnel')
 			reservation.purpose = request.POST.get('purpose')
 			reservation.room_no.building_no.add_new_request()
@@ -36,9 +34,11 @@ def reservation(request, building_no, classroom_no):
 			reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
 			return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations})
 	else:
+		date = request.GET['date']
+		print(date)
 		now = datetime.datetime.now()
 		reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
-		return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations})
+		return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations, 'date' : date})
 
 def book_manage(request):
     reservations = Reservation.objects.filter(user = request.user).order_by('-pk')
