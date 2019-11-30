@@ -28,4 +28,5 @@ def search(request):
     for room in rooms:
         if is_reservation_valid(room, request.POST.get('date'),request.POST.get('start_time'), request.POST.get('end_time')):
             searched_room.append(room.room_no)
-    return render(request, 'search.html', {'date' : date, 'start_time' : start_time, 'end_time' : end_time, 'buildings' : buildings, 'selected_building' : building, 'searched_room' : searched_room})
+    room_queryset = ClassRoom.objects.filter(room_no__in=searched_room)
+    return render(request, 'search.html', {'date' : date, 'start_time' : start_time, 'end_time' : end_time, 'buildings' : buildings, 'selected_building' : building, 'searched_room' : room_queryset})

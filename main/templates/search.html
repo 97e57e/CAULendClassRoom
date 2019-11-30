@@ -81,8 +81,13 @@
 							<tr>
 							<th scope="row">{{selected_building.building_no}}</th>
 							<td>{{room}}</td>
-							<td>헉</td>
-							<td><button type="reserve" class="btn btn-success btn-sm">예약하기</button></td>
+							<td>{{room.capacity}}</td>
+							<td>
+								<form action="{% url 'reservation' selected_building.building_no room.room_no %}">
+										<input type="hidden" value={{date}} name="date">
+										<button type="reserve" class="btn btn-success btn-sm">예약하기</button>
+								</form>
+							</td>
 							</tr>
 				{% endfor %}
 			</tbody>

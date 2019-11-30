@@ -16,16 +16,7 @@
 
     <div class="reservation-contents">
         <div class="present-reservation-list">
-            {% for reservation in reservations %}
-            <p>
-                {{reservation}} ~ {{reservation.end_time}}까지
-                {% if reservation.status is 0%}
-                예약대기
-                {% elif reservation.status is 1%}
-                예약
-                {% endif %}
-            </p>
-            {% endfor %}
+
         </div>
 
         <div class="container">
@@ -43,9 +34,17 @@
 
                                 <div class="row" style="width: 100%;">
                                     <div style="width: 50%;">
-                                            <p>{{date}}예약 목록</p>
+                                        <p>{{date}} 예약 목록</p>
                                             {% for reservation in reservations %}
-                                                {{reservation}}
+                                            <p>
+                                                {{reservation.user.profile.user_name}}
+                                                {{reservation.start_time}} ~ {{reservation.end_time}}
+                                                {% if reservation.status is 0%}
+                                                예약대기
+                                                {% elif reservation.status is 1%}
+                                                예약
+                                                {% endif %}
+                                            </p>
                                             {% endfor %}
                                     </div>
                                     <div style="width: 50%;">
