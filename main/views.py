@@ -15,7 +15,6 @@ def building(request, building_no, floor):
     rooms = building.classroom_set.filter(floor=int_floor)
     valid_floor_range = get_valid_floor_range(building)
     return render(request, 'building.html', {'building' : building, 'rooms' : rooms, 'current_floor' : floor, 'range' : valid_floor_range})
-
     
 def classroom(request, building_no, classroom_no):
     classroom = get_object_or_404(ClassRoom, building_no=building_no, room_no=classroom_no)
