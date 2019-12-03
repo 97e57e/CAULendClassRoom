@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, resolve_url
+from django.shortcuts import render, redirect, resolve_url, get_object_or_404
 from django.views.generic import DetailView
 import datetime
 from .models import Reservation
@@ -72,7 +72,9 @@ def reservation_deny(request, reservation_id):
 	update_reservation.deny()
 	return redirect('manager_page', update_reservation.room_no.building_no.pk)
 
-def reservation_cancel(request):
+def reservation_cancel(request, reservation_id):
+	reservation = get_object_or_404(Reservation, id = reservation_id)
+	reservation.delete()
 	return redirect('book_manage')
 
 class reservationDetail(DetailView):

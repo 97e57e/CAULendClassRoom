@@ -8,7 +8,7 @@ urlpatterns = [
     path('manager-page/<building_no>', views.manager, name='manager_page'),
     path('reservation-confirm/<int:reservation_id>', views.reservation_confirm, name='reservation_confirm'),
     path('reservation-deny/<int:reservation_id>', views.reservation_deny, name='reservation_deny'),
-    path('reservation-cancel' , views.reservation_cancel, name='reservation_cancel'),
+    path('reservation-cancel/<int:reservation_id>' , views.reservation_cancel, name='reservation_cancel'),
     
     path('reservation-detail/<int:pk>', views.reservationDetail.as_view(), name='detail'),
 ]
