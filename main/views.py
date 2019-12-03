@@ -26,7 +26,7 @@ def search(request):
     start_time = request.POST.get('start_time')
     end_time = request.POST.get('end_time')
     building = get_object_or_404(Building, building_no = request.POST.get('building'))
-    rooms = building.classroom_set.all().order_by('room_no')
+    rooms = building.classroom_set.filter(building_no = building.building_no).order_by('room_no')
     searched_room = []
     for room in rooms:
         if is_reservation_valid(room, request.POST.get('date'),request.POST.get('start_time'), request.POST.get('end_time')):

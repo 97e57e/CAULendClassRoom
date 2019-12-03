@@ -69,7 +69,7 @@ def reservation_confirm(request, reservation_id):
 def reservation_deny(request, reservation_id):
 	update_reservation = Reservation.objects.get(id=reservation_id)
 	update_reservation.room_no.building_no.sub_new_request()
-	update_reservation.deny()
+	update_reservation.request_deny()
 	return redirect('manager_page', update_reservation.room_no.building_no.pk)
 
 def reservation_cancel(request, reservation_id):
