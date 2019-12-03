@@ -82,6 +82,33 @@ class reservationDetail(DetailView):
 	template_name='reservation_detail.html'
 
 
+def reservation_modify(request, reservation_id):
+	reservation = get_object_or_404(Reservation, id = reservation_id)
+	classroom = ClassRoom.objects.get(building_no=reservation.room_no.building_no.building_no, room_no=reservation.room_no.room_no)
+	
+	if request.method == "POST":
+		s_hour = request.POST['start-hour']
+		e_hour = request.POST['end-hour']
+		start_time = s_hour + ":00"
+		end_time = e_hour + ":00"
+		reservation.room_no = classroom
+		reservation.start_time = start_time
+		reservation.end_time = end_time
+		reservation.user = request.user
+		reservation.personnel = request.POST.get('personnel')
+		reservation.purpose = request.POST.get('purpose')
+		reservation.room_no.building_no.add_new_request()
+		reservation.update()
+		return redirect('book_manage')
+	else:
+		reservation.request_modify()
+		date = reservation.date
+		print(date)
+		now = datetime.datetime.now()
+		reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
+		return render(request, 'reservation_modify.html', {'classroom' : classroom, 'reservations' : reservations, 'date' : date, 'reservation_id' : reservation_id})
+
+
 # # 예약 불가능시 띄워줄 메시지
 # def password(request):
 # 	if request.method == 'POST':

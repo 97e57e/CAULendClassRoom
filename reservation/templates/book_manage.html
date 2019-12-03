@@ -39,7 +39,7 @@
                                   예약 거절
                                 {% endif %}
                             </td>
-                            <td><button class="btn btn-primary btn-block">예약수정</button></td>
+                            <td><button onclick = "location.href='{% url 'reservation_modify' reservation.id%}'"class="btn btn-primary btn-block">예약수정</button></td>
                             <td><button onclick = "location.href='{% url 'reservation_cancel' reservation.id%}'"class="btn btn-primary btn-block">예약취소</button></td>
                         </tr>
                     {% endfor %}

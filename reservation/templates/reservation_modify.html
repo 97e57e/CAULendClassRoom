@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}예약 페이지 |{% endblock %}
+{% block content%}
+{% if not user.is_authenticated %}
+<script>
+    alert('로그인이 필요합니다!');
+    window.location.href = '{% url 'signin' %}';
+</script>
+{% endif %}
+{% if messages %}
+{% for message in messages %}
+<p class="{{ message.tags }}"><b>{{ message }}</b></p>
+{% endfor %}
+{% endif %}
+<div class="common-pg-contents">
+
+    <div class="reservation-contents">
+        <div class="present-reservation-list">
+
+        </div>
+
+        <div class="container">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+
+                        <div class="col-lg-7 m-auto">
+                            <div class="p-7">
+
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">{{classroom}} 예약 페이지</h1>
+                                </div>
+
+                                <div class="row" style="width: 100%;">
+                                    <div style="width: 50%;">
+                                        <p>{{date}} 예약 목록</p>
+                                            {% for reservation in reservations %}
+                                            <p>
+                                                {{reservation.user.profile.user_name}}
+                                                {{reservation.start_time}} ~ {{reservation.end_time}}
+                                                {% if reservation.status is 0%}
+                                                예약대기
+                                                {% elif reservation.status is 1%}
+                                                예약
+                                                {% endif %}
+                                            </p>
+                                            {% endfor %}
+                                    </div>
+                                    <div style="width: 50%;">
+                                            <form method="POST" action="{% url 'reservation_modify' reservation_id%}">
+                                                {% csrf_token %}
+                                                <p> - 예약 날짜 : {{date}}<input type="hidden" value = {{date}} name="date"></p>
+                                                <p> - 예약 시간 :
+                                                    <select name="start-hour" class="btn-secondary">
+                                                        <option selected>--</option>
+                                                        <option>18</option>
+                                                        <option>19</option>
+                                                        <option>20</option>
+                                                        <option>21</option>
+                                                    </select>시 ~
+                                                    <select name="end-hour" class="btn-secondary">
+                                                        <option selected>--</option>
+                                                        <option>18</option>
+                                                        <option>19</option>
+                                                        <option>20</option>
+                                                        <option>21</option>
+                                                    </select>시
+                                                </p>
+                                                <p> - 예약자 : {{user.profile.user_name}}</p>
+                                                <p> - 인원 : <input type="number" name="personnel"></p>
+                                                - 이용목적
+                                                <p><textarea cols="50" rows="10" name="purpose"></textarea></p>
+                                                <!-- <p>첨부파일 : </p> -->
+
+                                                <p><input class="btn btn-secondary btn-block" type="submit" value="수정">
+                                                </p>
+                                            </form>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--  Jquery 소스 임포트-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+{% endblock %}
