@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from .models import Building
 from .models import ClassRoom
+from .valid_floor_range import get_valid_floor_range
 from reservation.reserve_valid_chk import is_reservation_valid
 
 def index(request):
@@ -9,10 +10,18 @@ def index(request):
     return render(request, 'index.html', {'buildings' : buildings})
 
 def building(request, building_no, floor):
-    building = get_object_or_404(Building, pk=building_no)
-    rooms = building.classroom_set.filter(floor=floor)
-    return render(request, 'building.html', {'building' : building, 'rooms' : rooms, 'current_floor' : floor, 'range' : range(1, building.max_floor+1)})
+    int_floor = 0
+    if floor[0] == 'B':
+        int_floor = int('-'+floor[1])
+    else:
+        int_floor = floor
 
+    building = get_object_or_404(Building, pk=building_no)
+    rooms = building.classroom_set.filter(floor=int_floor)
+    valid_floor_range = get_valid_floor_range(building)
+    return render(request, 'building.html', {'building' : building, 'rooms' : rooms, 'current_floor' : floor, 'range' : valid_floor_range})
+
+    
 def classroom(request, building_no, classroom_no):
     classroom = get_object_or_404(ClassRoom, building_no=building_no, room_no=classroom_no)
     return render(request, 'classroom.html', {'classroom' : classroom, 'room_name' : classroom.__str__})
