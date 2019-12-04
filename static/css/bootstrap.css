@@ -3201,6 +3201,16 @@ fieldset:disabled a.btn {
   border-radius: 0.3rem;
 }
 
+
+
+.btn-xm, .btn-group-xm > .btn {
+  padding: 0.17rem 0.175rem;
+  font-size: 0.8rem;
+  line-height: 1.0;
+  border-radius: 0.2rem;
+}
+
+
 .btn-block {
   display: block;
   width: 100%;
@@ -3573,6 +3583,13 @@ input[type="button"].btn-block {
 
 .dropleft .dropdown-toggle-split::before {
   margin-right: 0;
+}
+
+
+
+.btn-xm + .dropdown-toggle-split, .btn-group-xm > .btn + .dropdown-toggle-split {
+  padding-right: 0.2625‬rem;
+  padding-left: 0.2625‬rem;
 }
 
 .btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split {
@@ -4442,11 +4459,6 @@ input[type="button"].btn-block {
 
 .navbar-brand {
   font-family: "Comic Sans MS", cursive, sans-serif;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  text-align: center;
-  margin:0 ;
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
@@ -10807,3 +10819,29 @@ legend {
 .list-group-item h6 {
   color: inherit;
 }
+
+
+
+
+
+
+.image-container {
+    position: relative;
+   /* width: 200px;
+    height: 300px;*/
+}
+.image-container .after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #FFF;
+}
+
+/*
+.image-container:hover .after {
+    display: block;
+    background: rgba(0, 0, 0, .6);
+}*/
+
