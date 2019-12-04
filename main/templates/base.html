@@ -9,7 +9,6 @@
 	<script src ="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 	<link rel="stylesheet" href="{% static 'css/custom.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/base.css' %}">
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/index.js' %}"></script>
 	
@@ -20,6 +19,6 @@
 		
 		<div class="content-wrapper">{% block content %} {% endblock %}</div>
 		
-		{% block footer %}{% include 'footer.html' %} {% endblock %}
+		{% block footer %} {% include 'footer.html' %} {% endblock %}
 	</body>
 </html>
