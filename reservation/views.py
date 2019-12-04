@@ -31,9 +31,10 @@ def reservation(request, building_no, classroom_no):
 			reservation.save()
 			return redirect('book_manage')
 		else:
-			messages.info(request, '예약이 불가능합니다.')
+			# messages.info(request, '예약이 불가능합니다.')
+			message = "해당 시간에 예약이 불가 합니다."
 			reservations = Reservation.objects.filter(room_no = classroom, date=date).order_by('end_time')
-			return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations, 'date' : date})
+			return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations, 'date' : date, 'message' : message})
 	else:
 		date = request.GET['date']
 		now = datetime.datetime.now()
