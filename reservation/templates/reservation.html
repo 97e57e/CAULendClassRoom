@@ -7,10 +7,11 @@
     window.location.href = '{% url 'signin' %}';
 </script>
 {% endif %}
+
 {% if messages %}
-{% for message in messages %}
-<p class="{{ message.tags }}"><b>{{ message }}</b></p>
-{% endfor %}
+    <script>
+        alert("해당 시간에 예약이 불가 합니다.");
+    </script>
 {% endif %}
 <div class="common-pg-contents">
 
