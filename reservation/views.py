@@ -16,13 +16,14 @@ def reservation(request, building_no, classroom_no):
 		e_hour = request.POST['end-hour']
 		start_time = s_hour + ":00"
 		end_time = e_hour + ":00"
+		date = request.POST.get('date')
 		reservation = Reservation()
-		if is_reservation_valid(classroom.id, request.POST.get('date'), start_time, end_time):
+		if is_reservation_valid(classroom.id, date, start_time, end_time):
 			reservation.room_no = classroom
 			reservation.start_time = start_time
 			reservation.end_time = end_time
 			reservation.user = request.user
-			reservation.date = request.POST.get('date')
+			reservation.date = date
 			reservation.personnel = request.POST.get('personnel')
 			reservation.purpose = request.POST.get('purpose')
 			reservation.room_no.building_no.add_new_request()
@@ -32,7 +33,7 @@ def reservation(request, building_no, classroom_no):
 			messages.info(request, '예약이 불가능합니다.')
 			now = datetime.datetime.now()
 			reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
-			return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations})
+			return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations, 'date' : date})
 	else:
 		date = request.GET['date']
 		print(date)
