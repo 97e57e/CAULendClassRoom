@@ -12,6 +12,7 @@ def reservation(request, building_no, classroom_no):
 	classroom = ClassRoom.objects.get(building_no=building_no, room_no=classroom_no)
 	if request.method == "POST":
 		#TODO 시간 formatting 함수화 시킬것, reservation form 으로 받을 것
+		print(classroom, '예약 요청 들어옴')
 		s_hour = request.POST['start-hour']
 		e_hour = request.POST['end-hour']
 		start_time = s_hour + ":00"
@@ -31,14 +32,12 @@ def reservation(request, building_no, classroom_no):
 			return redirect('book_manage')
 		else:
 			messages.info(request, '예약이 불가능합니다.')
-			now = datetime.datetime.now()
-			reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
+			reservations = Reservation.objects.filter(room_no = classroom, date=date).order_by('end_time')
 			return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations, 'date' : date})
 	else:
 		date = request.GET['date']
-		print(date)
 		now = datetime.datetime.now()
-		reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
+		reservations = Reservation.objects.filter(room_no = classroom, date=date).order_by('end_time')
 		return render(request, 'reservation.html', {'classroom' : classroom, 'reservations' : reservations, 'date' : date})
 
 def book_manage(request):
@@ -105,22 +104,5 @@ def reservation_modify(request, reservation_id):
 		reservation.request_modify()
 		date = reservation.date
 		print(date)
-		now = datetime.datetime.now()
-		reservations = Reservation.objects.filter(room_no = classroom.id, date=now.strftime('%Y-%m-%d')).order_by('end_time')
+		reservations = Reservation.objects.filter(room_no = classroom.id, date=date).order_by('end_time')
 		return render(request, 'reservation_modify.html', {'classroom' : classroom, 'reservations' : reservations, 'date' : date, 'reservation_id' : reservation_id})
-
-
-# # 예약 불가능시 띄워줄 메시지
-# def password(request):
-# 	if request.method == 'POST':
-# 		form = PasswordChangeForm(request.user, request.POST)
-# 		if form.is_valid():
-    # 			form.save()
-# 			update_session_auth_hash(request, form.user)
-# 			messages.success(request, 'Your password was updated successfully!')  # <-
-# 			return redirect('settings:password')
-# 		else:
-# 			messages.warning(request, 'Please correct the error below.')  # <-
-# 	else:
-# 		form = PasswordChangeForm(request.user)
-# 	return render(request, 'profiles/change_password.html', {'form': form})
