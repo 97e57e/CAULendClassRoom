@@ -12,11 +12,12 @@ def reservation(request, building_no, classroom_no):
 	classroom = ClassRoom.objects.get(building_no=building_no, room_no=classroom_no)
 	if request.method == "POST":
 		#TODO 시간 formatting 함수화 시킬것, reservation form 으로 받을 것
-		print(classroom, '예약 요청 들어옴')
-		s_hour = request.POST['start-hour']
-		e_hour = request.POST['end-hour']
-		start_time = s_hour + ":00"
-		end_time = e_hour + ":00"
+		s_hour = request.POST.get('start-hour')
+		e_hour = request.POST.get('end-hour')
+		start_time = s_hour
+		print(start_time)
+		end_time = e_hour
+		print(end_time)
 		date = request.POST.get('date')
 		reservation = Reservation()
 		if is_reservation_valid(classroom.id, date, start_time, end_time):
