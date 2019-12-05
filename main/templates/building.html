@@ -54,15 +54,19 @@
 							</div>
 						</a>
 						{% for room in rooms%}
-						<a href="{% url 'classroom' building.building_no room.room_no %}" class="list-group-item list-group-item-action">
+						<div class="list-group-item list-group-item-action">
 							<div class="row">
 								<div class="col-4">{{room.room_no}}호</div>
 								<div class="col-4">{{room.capacity}}명</div>
 								<div class="col-4">
-									<button type="text" id="date" class="btn btn-success btn-sm" href="{% url 'classroom' building.building_no room.room_no %}">예약하기</button>
+									<form action="{% url 'reservation' building.building_no room.room_no %}">
+										<!-- <button type="text" id="date" class="btn btn-success btn-sm">예약하기</button> -->
+										<input type="hidden" value="2019-12-05" name="date"/>
+										<input type="submit" class="btn btn-success btn-sm" value="예약하기"/>
+									</form>
 								</div>
 							</div>
-						</a>
+						</div>
 						{% endfor %}
 						
 						
