@@ -31,43 +31,22 @@
                             </div>
                         </div>
                     </thead>
-                    {% for reservation in reservations %}
-                    {{reservation}}
-                    {%endfor%}
                         <div class="col-lg-6">
-                            <legend class="text-center">일정표</legend>
+                            <legend class="text-center">예약내역</legend>
                             <div class="bs-component text-center">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th scope="col">시간</th>
-                                            <th scope="col">내용</th>
+                                            <th scope="col">예약자</th>
                                         </tr>
                                     <tbody>
-                                        <tr class="table-active">
-                                            <th scope="row">18:00-19:00</th>
-                                            <td>Column content</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">19:00-20:00</th>
-                                            <td>Column content</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">20:00-21:00</th>
-                                            <td>Column content</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">21:00-22:00</th>
-                                            <td>Column content</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">22:00-23:00</th>
-                                            <td>Column content</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">23:00-24:00</th>
-                                            <td>Column content</td>
-                                        </tr>
+                                        {% for reservation in reservations %}
+                                            <tr>
+                                                <th scope="row">{{reservation.start_time}}~{{reservation.end_time}}</th>
+                                                <td>{{reservation.user.profile.user_name}}</td>
+                                            </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -85,7 +64,7 @@
                                                 <!-- <input type="text" readonly class="form-control-plaintext" id="date"
                                                     value="2019-12-01"> -->
                                                     <input type="date" value={{date}} name="date"
-                                                    id="reservation-date" onchange="pick_date(this)">
+                                                    id="reservation-date" onchange="pick_date(this)" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
