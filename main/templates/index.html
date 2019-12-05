@@ -84,7 +84,7 @@
 
 <div class="cau-map-view">
 		{% for building in buildings %}
-				{{building.building_no}}관 : <a href="{% url 'building' building.building_no 1 %}">{{building.building_name}}</a><br>
+				{{building.building_no}}관 : <a href="{% url 'building' building.building_no 3 %}">{{building.building_name}}</a><br>
 		{% endfor %}
 </div>
 		

@@ -12,7 +12,7 @@ def index(request):
 def building(request, building_no, floor):
     int_floor = get_int_floor(floor)
     building = get_object_or_404(Building, pk=building_no)
-    rooms = building.classroom_set.filter(floor=int_floor)
+    rooms = building.classroom_set.filter(floor=int_floor).order_by('room_no')
     valid_floor_range = get_valid_floor_range(building)
     return render(request, 'building.html', {'building' : building, 'rooms' : rooms, 'current_floor' : floor, 'range' : valid_floor_range})
     
