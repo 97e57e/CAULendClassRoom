@@ -2,8 +2,6 @@
 {% load static %}
 {% block title %}{% endblock %}
 {% block content%}
-<script src="{% static 'js/ckeckSearchForm.js' %}"></script>
-
 <div class = "container-fluid">
 	<br><br>
 	<div class="row">
@@ -17,35 +15,44 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			
-			<form method="POST" onsubmit="return validate();" action="{% url 'search' %}" class="row" style="text-align: center; margin-left: 35px;">
+			<form method="POST" action="{% url 'search' %}" class="row" style="text-align: center; margin-left: 35px;">
 				{% csrf_token %}
-				<div class="col-md-3.5 ">
+				<div class="col-md-3.5">
 					<label for="month">날짜</label>
 					<input type="date" name="date" class="form-control" id="month" required>
 				</div>
 				
-				<div class="col-md-2 ">
-					<label for="s_time">시작시간</label>
-					<!-- <input type="time" class="form-control" id="s_time" required> -->
-					<select class="form-control" id="s_time" name="start_time">
-						<option>17시</option>
-						<option>18시</option>
-						<option>19시</option>
-						<option>20시</option>
-					<select>
+				<div class="col-md-2">
+					<label for="start_time">시작 시간</label>
+					<select class="form-control" id="start_time" name="start_time" required>
+						<option disabled selected value>--</option>
+						<option value="18">18:00</option>
+						<option value="19">19:00</option>
+						<option value="20">20:00</option>
+						<option value="21">21:00</option>
+						<option value="22">22:00</option>
+						<option value="23">23:00</option>
+					</select>
+					</div>
+					<div class="col-md-2">
+					<label for="end_time">종료 시간</label>
+					<select class="form-control" id="end_time" name="end_time" required>
+						<option disabled selected value>--</option>
+
+					</select>
+					<script>
+						$('#start_time')
+						.change(function () {
+							var stime = Number($('#start_time option:selected').val())
+							$('#end_time').find('option').remove().end().append('<option disabled selected value>--</option>')
+							for (var i = stime + 1; i < 24; i++) {
+							$('#end_time').append('<option value="' + i + '">' + i + ':00</option>')
+							}
+							$('#end_time').append('<option value="0">24:00</option>')
+						});
+					</script>
 				</div>
 
-				<div class="col-md-2 ">
-					<label for="s_time">종료시간</label>
-					<!-- <input type="time" class="form-control" id="s_time" required> -->
-					<select class="form-control" id="s_time" name="end_time">
-						<option>18시</option>
-						<option>19시</option>
-						<option>20시</option>
-						<option>21시</option>
-					<select>
-				</div>
-				
 				<div class="col-md-2 ">
 					<label for="building">건물</label>
 					<select class="form-control" id="building" name="building">
