@@ -82,10 +82,22 @@
 	<div class="col-md-3"></div>
 </div>
 
-<div class="cau-map-view">
-		{% for building in buildings %}
-				{{building.building_no}}관 : <a href="{% url 'building' building.building_no 1 %}">{{building.building_name}}</a><br>
-		{% endfor %}
+<div class="cau-map-view row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+		<div class="bs-component text-center">
+				<div class="list-group" id="list-group">
+					<a href="#list-group" class="list-group-item list-group-item-action active">건물 목록</a>
+					{% for building in buildings %}
+							<a href="{% url 'building' building.building_no 1 %}" class="list-group-item list-group-item-action">
+								{{building.building_no}}관 : {{building.building_name}}
+							</a>
+					{% endfor %}
+					<br>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
 </div>
 		
 
