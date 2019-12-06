@@ -23,9 +23,11 @@
 				<div class="bs-component text-center">
 					<div class="list-group">
 						<a href="#" class="list-group-item list-group-item-action active">층수</a>
+						<div style="overflow:scroll; height:300px;">
 						{% for i in range %}
 						<a href="{% url 'building' building.building_no i%}" class="list-group-item list-group-item-action">{{i}}층</a>
 						{% endfor %}
+						</div>
 						<br>
 					</div>
 				</div>
@@ -53,6 +55,7 @@
 								<div class="col-4">예약</div>
 							</div>
 						</a>
+						<div style="overflow:scroll; height:300px;">
 						{% for room in rooms%}
 						<div class="list-group-item list-group-item-action">
 							<div class="row">
@@ -68,7 +71,7 @@
 							</div>
 						</div>
 						{% endfor %}
-						
+						</div>
 						
 					</div>
 				</div>
