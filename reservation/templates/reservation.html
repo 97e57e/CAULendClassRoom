@@ -2,76 +2,130 @@
 {% block title %}예약 페이지 |{% endblock %}
 {% block content%}
 {% if not user.is_authenticated %}
+<script>
+    alert('로그인이 필요합니다!');
+    window.location.href = '{% url 'signin' %}';
+</script>
+{% endif %}
+
+{% if message %}
     <script>
-        alert('로그인이 필요합니다!');
-        window.location.href = '{% url 'signin' %}';
+        alert("해당 시간에 예약이 불가 합니다.");
     </script>
 {% endif %}
 <div class="common-pg-contents">
-    <p class="common-subheading">예약 페이지</p>
 
     <div class="reservation-contents">
         <div class="present-reservation-list">
-        {% for reservation in reservations %}
-            <p>
-                {{reservation}} ~ {{reservation.end_time}}까지
-                {% if reservation.status is 0%}
-                예약대기
-                {% elif reservation.status is 1%}
-                예약
-                {% endif %}
-            </p>
-        {% endfor %}
+
         </div>
 
-        <div class="reservation-form-wrapper">
-            <form method="POST" action="{% url 'reservation' classroom.building_no.building_no classroom.room_no %}">
-                {% csrf_token %}
-                <p> - 예약 날짜 : <input type="text" name="date"></p>
-                <p> - 예약 시간 :
-                    <select name="start-hour">
-                        <option selected>--</option>
-                        <option>18</option>
-                        <option>19</option>
-                        <option>20</option>
-                        <option>21</option>
-                    </select>
-                    :
-                    <select name="start-min">
-                        <option selected>--</option>
-                        <option>00</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>30</option>
-                        <option>40</option>
-                        <option>50</option>
-                    </select> ~
-                    <select name="end-hour">
-                        <option selected>--</option>
-                        <option>18</option>
-                        <option>19</option>
-                        <option>20</option>
-                        <option>21</option>
-                    </select>
-                    :
-                    <select name="end-min">
-                        <option selected>--</option>
-                        <option>00</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>30</option>
-                        <option>40</option>
-                        <option>50</option>
-                    </select>
-                </p>
-                <p> - 예약자 : {{user.profile.user_name}}</p>
-                <p> - 인원 : <input type="number" name="personnel"></p>
-                    - 이용목적
-                <p><textarea cols="50" rows="10" name="purpose"></textarea></p>
-                <!-- <p>첨부파일 : </p> -->
-                <p><input type="submit" value="제출"></p>
-            </form>
+        <div class="container">
+            <div class="">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="page-header text-center">
+                                <h1 id="tables">{{classroom}}</h1>
+                            </div>
+                        </div>
+                    </thead>
+                        <div class="col-lg-6">
+                            <legend class="text-center">예약내역</legend>
+                            <div class="bs-component text-center">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">시간</th>
+                                            <th scope="col">예약자</th>
+                                        </tr>
+                                    <tbody>
+                                        {% for reservation in reservations %}
+                                            <tr>
+                                                <th scope="row">{{reservation.start_time}}~{{reservation.end_time}}</th>
+                                                <td>{{reservation.user.profile.user_name}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="bs-component">
+                                <form method="POST"
+                                action="{% url 'reservation' classroom.building_no.building_no classroom.room_no %}">
+                                {% csrf_token %}
+                                    <fieldset>
+                                        <legend class="text-center">예약하기</legend>
+                                        <div class="form-group row">
+                                            <label for="date" class="col-sm-2 col-form-label">날짜</label>
+                                            <div class="col-sm-10">
+                                                <!-- <input type="text" readonly class="form-control-plaintext" id="date"
+                                                    value="2019-12-01"> -->
+                                                    <input type="date" value={{date}} name="date"
+                                                    id="reservation-date" onchange="pick_date(this)" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="startTime">시작 시간</label>
+                                            <select class="form-control" id="startTime" name="start-hour">
+                                                <option>18:00</option>
+                                                <option>19:00</option>
+                                                <option>20:00</option>
+                                                <option>21:00</option>
+                                                <option>22:00</option>
+                                                <option>23:00</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="endTime">종료 시간</label>
+                                            <select class="form-control" id="endTime" name="end-hour">
+                                                <option>19:00</option>
+                                                <option>20:00</option>
+                                                <option>21:00</option>
+                                                <option>22:00</option>
+                                                <option>23:00</option>
+                                                <option>24:00</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="headcount">인원수</label>
+                                            <input type="number" class="form-control" id="headcount" name="personnel">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contents">내용</label>
+                                            <textarea class="form-control" id="contents" rows="2" name="purpose"></textarea>
+                                        </div>
+                                    </fieldset>
+                                
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-center">
+                            <input type="submit" class="btn btn-secondary btn-lg" style="width: 30%" value="신청하기">
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
         </div>
+
     </div>
 </div>
+
+<!--  Jquery 소스 임포트-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script>
+    var link = location.href;
+    console.log(link.split('?')[1]);
+    link = link.replace(link.split('?')[1], '');
+    console.log(link);
+
+    function pick_date(obj) {
+        var date = document.getElementById('reservation-date').value;
+        location.href = link + "date=" + date;
+    }
+</script>
 {% endblock %}

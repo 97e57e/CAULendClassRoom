@@ -1,20 +1,105 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}{% endblock %}
 {% block content%}
-<div class="common-pg-contetns">
-    <div class="classroom-search-box">
-        빈 강의실 검색<br>
-        <form action="{% url 'search' %}">
-            <input type="date">
-            <input type="number">시 ~ <input type="number">시
-            <input type="submit" value="검색">
-        </form>
-    </div>
+<script src="{% static 'js/ckeckSearchForm.js' %}"></script>
 
-    <div class="cau-map-view">
-        {% for building in buildings %}
-            {{building.building_no}}관 : <a href="{% url 'building' building.building_no 1 %}">{{building.building_name}}</a><br>
-        {% endfor %}
-    </div>
+<div class = "container-fluid">
+	<br><br>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6" style="text-align: center;"><h1>강의실 검색</h1>
+			<hr>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			
+			<form method="POST" onsubmit="return validate();" action="{% url 'search' %}" class="row" style="text-align: center; margin-left: 35px;">
+				{% csrf_token %}
+				<div class="col-md-3.5 ">
+					<label for="month">날짜</label>
+					<input type="date" name="date" class="form-control" id="month" required>
+				</div>
+				
+				<div class="col-md-2 ">
+					<label for="s_time">시작시간</label>
+					<!-- <input type="time" class="form-control" id="s_time" required> -->
+					<select class="form-control" id="s_time" name="start_time">
+						<option>17시</option>
+						<option>18시</option>
+						<option>19시</option>
+						<option>20시</option>
+					<select>
+				</div>
+
+				<div class="col-md-2 ">
+					<label for="s_time">종료시간</label>
+					<!-- <input type="time" class="form-control" id="s_time" required> -->
+					<select class="form-control" id="s_time" name="end_time">
+						<option>18시</option>
+						<option>19시</option>
+						<option>20시</option>
+						<option>21시</option>
+					<select>
+				</div>
+				
+				<div class="col-md-2 ">
+					<label for="building">건물</label>
+					<select class="form-control" id="building" name="building">
+						{% for building in buildings %}
+							<option value="{{building.building_no}}">
+								{{building.building_no}}
+							</option>
+						{% endfor %}
+					<select>
+				</div>
+				
+				<div class="col-md-2 ">
+					<button type="submit" class="btn btn-secondary" style="margin-top:30px;">
+						검색
+					</button>
+				</div>
+			</form>
+			
+		</div>
+	<div class="col-md-3"></div>
 </div>
+
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6"><br><hr></div>
+	<div class="col-md-3"></div>
+</div>
+
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<img style="height: auto; width: 100%; display: block;" src="{% static 'image/map.jpg' %}">
+	</div>
+	<div class="col-md-3"></div>
+</div>
+
+<div class="cau-map-view row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+	<div class="bs-component text-center">
+			<div class="list-group" id="list-group">
+				<a href="#list-group" class="list-group-item list-group-item-action active">건물 목록</a>
+				<div style="overflow:scroll; height:200px;">
+				{% for building in buildings %}
+						<a href="{% url 'building' building.building_no 3 %}" class="list-group-item list-group-item-action">
+							{{building.building_no}}관 : {{building.building_name}}
+						</a>
+				{% endfor %}
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3"></div>
+		
+
 {% endblock %}

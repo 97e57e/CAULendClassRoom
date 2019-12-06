@@ -20,9 +20,13 @@ def signup(request):
             user = user_form.save()
             user.profile.user_name = request.POST['user_name']
             user.profile.user_code = request.POST['user_code']
-            user.profile.phone_number = request.POST['phone_number']
+            phone_number = request.POST.get('phone_head')
+            phone_number += request.POST.get('phone_body')
+            print(phone_number)
+            user.profile.phone_number = phone_number
             user.profile.brith = request.POST['birth']
             user.profile.department = request.POST['dept_name']
+            user.profile.userType = 'student'
             user.save()
             return redirect('signup_done')
         user_form.add_error(None, '회원가입에 실패하였습니다.')

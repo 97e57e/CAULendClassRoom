@@ -1,25 +1,47 @@
 {% extends 'base.html' %}
 {% block title %}예약 상세 |{% endblock %}
 {% block content%}
-<div class="common-pg-contents">
-    <p class="common-subheading">예약 상세 페이지</p>
-    <p>{{reservation}}</p>
-    <p>{{reservation.user.profile.department}}</p>
-    <p>신청인 : {{reservation.user.profile.user_name}}</p>
-    <p>예약 호실 : {{reservation.room_no}}</p>
-    <p>예약 건물 : {{reservation.room_no.building_no}}</p>
-    <p>예약 날짜 :{{reservation.date}}</p>
-    <p>이용 목적 : {{reservation.purpose}}</p>
-    <p>예약 시간 : {{reservation.start_time}} ~ {{reservation.end_time}}</p>
-    <p>상태 : 승인 대기</p>
-    <form class="applied-item-confirm" method="POST" action="{% url 'reservation_confirm' reservation.id %}">
-            {% csrf_token %}
-            <input type="submit" value="승인">
-    </form>
-    <form class="applied-item-deny" method="POST" action="{% url 'reservation_deny' reservation.id %}"">
-        {% csrf_token %}
-        <input type="submit" value="거절">
-    </form>
+<div class = "container-fluid">
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+  
+  
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h2 class="card-title text-center">예약 상세 페이지</h2>
+              <br>
 
-</div>
+            <p>소속 : {{reservation.user.profile.department}}</p>
+            <p>신청인 : {{reservation.user.profile.user_name}}</p>
+            <p>예약 호실 : {{reservation.room_no}}</p>
+            <p>예약 건물 : {{reservation.room_no.building_no}}</p>
+            <p>예약 날짜 : {{reservation.date}}</p>
+            <p>이용 목적 : {{reservation.purpose}}</p>
+            <p>예약 시간 : {{reservation.start_time}} ~ {{reservation.end_time}}</p>
+            <p>상태 : {% if reservation.status is 1%}
+                        예약 승인
+                    {% elif reservation.status is 0%}
+                        승인 대기중
+                    {% elif reservation.status is 2%}
+                        예약 거절
+                    {% endif %}</p>
+            <form class="applied-item-confirm" method="POST" action="{% url 'reservation_confirm' reservation.id %}">
+                {% csrf_token %}
+                <input class="btn btn-secondary btn-block" type="submit" value="승인">
+            </form>
+            <form class="applied-item-deny" method="POST" action="{% url 'reservation_deny' reservation.id %}" style="margin-top: 8px">
+                  {% csrf_token %}
+                  <input class="btn btn-secondary btn-block" type="submit" value="거절">
+            </form>
+            </div>
+          </div>
+  
+  
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

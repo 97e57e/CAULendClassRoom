@@ -1,16 +1,97 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}검색 | {% endblock %}
 {% block content%}
-<div class="classroom-search-box">
-    빈 강의실 검색<br>
-    <form action="{% url 'search' %}">
-        <input type="date">
-        <input type="number">시 ~ <input type="number">시
-        <input type="submit" value="검색">
-    </form>
-</div>
+<script src="{% static 'js/ckeckSearchForm.js' %}"></script>
 
+<div class = "container-fluid">
+	<br><br>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6" style="text-align: center;"><h1>강의실 검색</h1>
+			<hr>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			
+			<form method="POST" onsubmit="return validate();" action="{% url 'search' %}" class="row" style="text-align: center; margin-left: 35px;">
+				{% csrf_token %}
+				<div class="col-md-3.5">
+					<label for="month">날짜</label>
+					<input type="date" name="date" class="form-control" id="month" required value={{date}}>
+				</div>
+				
+				<div class="col-md-2">
+					<label for="s_time">시작시간</label>
+					<select class="form-control" id="s_time" name="start_time">
+						<option {% if start_time == "17시" %} selected {% endif %}>17시</option>
+						<option {% if start_time == "18시" %} selected {% endif %}>18시</option>
+						<option {% if start_time == "19시" %} selected {% endif %}>19시</option>
+						<option {% if start_time == "20시" %} selected {% endif %}>20시</option>
+					<select>
+				</div>
+
+				<div class="col-md-2">
+					<label for="s_time">종료시간</label>
+					<select class="form-control" id="s_time" name="end_time">
+						<option {% if end_time == "18시" %} selected {% endif %}>18시</option>
+						<option {% if end_time == "19시" %} selected {% endif %}>19시</option>
+						<option {% if end_time == "20시" %} selected {% endif %}>20시</option>
+						<option {% if end_time == "21시" %} selected {% endif %}>21시</option>
+					<select>
+				</div>
+				
+				<div class="col-md-2">
+					<label for="building">건물</label>
+					<select class="form-control" id="building" name="building" value={{selected_building}>
+						{% for building in buildings %}
+							<option {% if selected_building.building_no == building.building_no %} selected {% endif %} value="{{building.building_no}}">
+								{{building.building_no}}
+							</option>
+						{% endfor %}
+					<select>
+				</div>
+				
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-secondary" style="margin-top:30px;">
+						검색
+					</button>
+				</div>
+			</form>
+			
+		</div>
+	<div class="col-md-3"></div>
+</div>
 <div class="common-pg-contents">
-    <p>검색 결과</p>
+	<div class="bs-component text-center">
+		<table class="table table-hover" style="overflow: auto; height: 500px;">
+		  <thead>
+			<tr>
+			  <th scope="col">건물</th>
+			  <th scope="col">강의실</th>
+			  <th scope="col">인원수</th>
+			  <th scope="col">예약</th>
+			</tr>
+		</thead>
+		<tbody>
+				{% for room in searched_room %}
+							<tr>
+							<th scope="row">{{selected_building.building_no}}</th>
+							<td>{{room}}</td>
+							<td>{{room.capacity}}</td>
+							<td>
+								<form action="{% url 'reservation' selected_building.building_no room.room_no %}">
+										<input type="hidden" value={{date}} name="date">
+										<button type="reserve" class="btn btn-success btn-sm">예약하기</button>
+								</form>
+							</td>
+							</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 </div>
 {% endblock %}

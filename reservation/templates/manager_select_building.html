@@ -2,12 +2,67 @@
 {% block title %}관리자용 페이지 |{% endblock %}
 {% block content%}
 <div class="common-pg-contents">
-    <p class="common-subheading">예약 관리 페이지</p>
-    
-    {% for building in buildings %}
-        {{building.building_no}}관 : <a href="{% url 'manager_page' building.building_no %}">{{building.building_name}}</a>
-        새로운 예약 요청 : {{building.new_request_reservation}}<br>
-    {% endfor %}
+    <br>
+    <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-header text-center">
+                        <h1>중앙대 건물 조회</h1>
+                    </div>
+                </div>
+    </div>
         
+    <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <hr>
+                </div>
+                <div class="col-lg-3"></div>
+    </div>
+
+    <table class="table" style="text-align: center;">
+        <tr>
+            {% for building in buildings1 %}
+                <td >
+                    <a class="btn btn-primary btn-lg" role="button" href="{% url 'manager_page' building.building_no %}">　{{building.building_no}}관　</a>
+                    <br>
+                    <h7><strong>{{building.building_name}}</strong></h7>
+                    <br>예약 요청 건<span class="badge badge-secondary"> {{building.new_request_reservation}} </span>
+                </td>        
+            {% endfor %}                
+        </tr>
+        <tr>
+            {% for building in buildings2 %}
+                <td >
+                    <a class="btn btn-primary btn-lg" role="button" href="{% url 'manager_page' building.building_no %}">　{{building.building_no}}관　</a>
+                    <br>
+                    <h7><strong>{{building.building_name}}</strong></h7>
+                    <br>예약 요청 건<span class="badge badge-secondary"> {{building.new_request_reservation}} </span>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for building in buildings3 %}
+                <td >
+                    <a class="btn btn-primary btn-lg" role="button" href="{% url 'manager_page' building.building_no %}">　{{building.building_no}}관　</a>
+                    <br>
+                    <h7><strong>{{building.building_name}}</strong></h7>
+                    <br>예약 요청 건<span class="badge badge-secondary"> {{building.new_request_reservation}} </span>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for building in buildings4 %}
+                <td >
+                    <a class="btn btn-primary btn-lg" role="button" href="{% url 'manager_page' building.building_no %}">　{{building.building_no}}관　</a>
+                    <br>
+                    <h7><strong>{{building.building_name}}</strong></h7>
+                    <br>예약 요청 건<span class="badge badge-secondary"> {{building.new_request_reservation}} </span>
+                </td>
+            {% endfor %}
+        </tr>
+            
+    </table>
+    
 </div>
+
 {% endblock %}

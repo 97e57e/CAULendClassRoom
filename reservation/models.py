@@ -23,6 +23,10 @@ class Reservation(models.Model):
         self.status = 1
         self.save()
 
+    def update(self):
+        self.status = 0
+        self.save(force_update=True)
+
     def request_modify(self):
         self.status = 2
         self.save()

@@ -1,4 +1,4 @@
-{% extends 'signbase.html' %}
+{% extends 'base.html' %}
 {% block title %}회원가입 | {% endblock %}
 {% block content %}
 
@@ -30,7 +30,7 @@
     
                       <div class="col-sm-3 ">
                         <div class="form-group">
-                          <select class="form-control" id="exampleSelect1">
+                          <select class="form-control" id="exampleSelect1" name="phone_head">
                             <option>010</option>
                             <option>011</option>
                           </select>
@@ -38,7 +38,7 @@
                       </div>
     
                       <div class="col-sm-9">
-                        <input type="text" class="form-control form-control-user" name="phone_number" placeholder="전화번호">
+                        <input type="text" class="form-control form-control-user" name="phone_body" placeholder="전화번호">
                       </div>
     
                     </div>
