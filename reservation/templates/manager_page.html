@@ -37,6 +37,7 @@
               </tr>
             <tbody>
               {% for reservation in applied_reservations %}
+              {% if reservation.room_no.building_no.building_no == building_no %}
               <tr>
                 <th scope="row">{{reservation.date}}</th>
                 <td>{{reservation.room_no}}</td>
@@ -45,6 +46,7 @@
                   <a href="{% url 'detail' reservation.id %}" class="applied-item-detail">{{reservation.user.profile.user_name}}</a>
                 </td>
               </tr>
+              {% endif %}
               {% endfor %}
             </tbody>
           </table>
